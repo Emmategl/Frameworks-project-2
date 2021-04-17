@@ -89,33 +89,14 @@ export async function remove(customerId) {
 /*BASKET */
 
 // add a product to basket
-export async function addToBasket(customer, productID) {
+export async function addToBasket(product, customerId) {
   let customerArray = await getAll();
-  let basketArray = await getBasket();
-  if (findProduct(customerArray, customer.customerId) !== -1 )
-    throw new Error(
-      `Product with Id:${customer.customerId} already exists`
-    );
-  basketArray.push(productID)
-  await save(basketArray);
+  let index = findCustomer(customerArray, customerId);
+  /* customerArray.push(product) */
+  customerArray[index].basket[1] = product
+  await save(customerArray);
+  /* await save(basketArray); */
 }
-
-// return all products from file
-/* export async function getBasket() { /* customerID */
-/*   try { */
-/*     let basketTxt = await fs.readFile(CUSTOMERS_FILE); */
-/*     let basket = JSON.parse(basketTxt); */
-/*     return basket */
-/*   } catch (err) { */
-/*     if (err.code === "ENOENT") { */
-/*       // file does not exits */
-/*       await save([]); // create a new file with ampty array */
-/*       return []; // return empty array */
-/*     } // // cannot handle this exception, so rethrow */
-/*     else throw err; */
-/*   } */
-/* } */
-/*  */
 
 export async function getBasketByID(customerId) { /* customerID */
   let customerArray = await getAll();
