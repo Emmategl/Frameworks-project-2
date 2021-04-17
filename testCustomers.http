@@ -10,15 +10,15 @@ GET http://localhost:3000/ HTTP/1.1
 ###
 
 // get basket
-GET http://localhost:3000/customers/23/basket HTTP/1.1
+GET http://localhost:3000/customers/30/basket HTTP/1.1
 
 ###
 
 // add to basket
-POST http://localhost:3000/customers/18/basket HTTP/1.1
+POST http://localhost:3000/customers/30/basket HTTP/1.1
 content-type: application/json
 
-{"customerID": 18, "basket": [{"productID": "id102935"}]}
+{"productID": "id35"}
 
 ###
 
@@ -26,7 +26,7 @@ content-type: application/json
 POST http://localhost:3000/customers HTTP/1.1
 content-type: application/json
 
-{"customerId":23, "customerName": "Emaama Peterson", "basket": [{"productID": "id102935"}]}
+{"customerId":31, "customerName": "Lone Peterson", "basket": [{"productID": "id992935"}]}
 ###
 
 // get customer by id
