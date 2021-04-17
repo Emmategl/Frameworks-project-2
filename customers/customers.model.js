@@ -85,10 +85,8 @@ export async function remove(customerId) {
 export async function addToBasket(product, customerId) {
   let customerArray = await getAll();
   let index = findCustomer(customerArray, customerId);
-  /* customerArray.push(product) */
-  customerArray[index].basket[1] = product
+  customerArray[index].basket.push(product);
   await save(customerArray);
-  /* await save(basketArray); */
 }
 
 export async function getBasketByID(customerId) { /* customerID */
@@ -98,6 +96,19 @@ export async function getBasketByID(customerId) { /* customerID */
     throw new Error(`Customer with ID:${customerId} doesn't exist`);
   else return customerArray[index].basket;
 }
+
+// delete product from basket
+export async function removeFromBasket(product, customerId) {
+  let customerArray = await getAll();
+  let index = findCustomer(customerArray, customerId); // findIndex
+  if (index === -1)
+    throw new Error(`Customer with ID:${customerId} doesn't exist`);
+  else {
+    customerArray[index].basket[1].splice(product, 1); // remove customer from array
+    await save(customerArray);
+  }
+}
+
 
 /* PRODUCTS */
 // return all products from file

@@ -18,9 +18,15 @@ GET http://localhost:3000/customers/30/basket HTTP/1.1
 POST http://localhost:3000/customers/30/basket HTTP/1.1
 content-type: application/json
 
-{"productID": "id35"}
+{"productID": "id990"}
 
 ###
+
+// delete product
+DELETE  http://localhost:3000/customers/30/basket/id35 HTTP/1.1
+
+###
+
 
 // create customer
 POST http://localhost:3000/customers HTTP/1.1

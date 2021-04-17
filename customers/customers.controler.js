@@ -78,6 +78,18 @@ export async function postBasket(req, res) {
   }
 }
 
+export async function deleteProduct (req, res) {
+  try {
+    let id = parseInt(req.params.id)
+    let prodid = parseInt(req.params.prodid)
+    await customerModel.removeFromBasket(prodid, id);
+    res.end();
+  } catch (error) {
+    // res.statusMessage=
+    res.status(400).send(error.message);
+  }
+}
+
 
 /* PRODUCTS*/
 export async function getAllProducts(req, res) {
