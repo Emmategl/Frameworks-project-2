@@ -1,3 +1,4 @@
+import e from "express";
 import * as fs from "fs/promises";
 const CUSTOMERS_FILE = "./customers/customers.json";
 const PRODUCTS_FILE = "./customers/products.json";
@@ -132,19 +133,26 @@ export async function getProductByID(productId) {
   else return productArray[index];
 }
 
-// get products categories
-export async function getProductCategories() {
-  let productsByCategory = [];
-  let productArray = await getAllProducts();
-  productsByCategory = productArray.filter(it => new RegExp('coffee').test(it.category))
-  return productsByCategory
-}
-
+//get product by category
 export async function getProductByCategory(categorys) {
   let productsByCategory = [];
   let productArray = await getAllProducts();
-  productsByCategory = productArray.filter(it => new RegExp(categorys).test(it.category))
+  productsByCategory = productArray.filter(({category}) => category === categorys)
   return productsByCategory
+}
+
+// get products categories
+export async function getProductCategories() {
+  let productCategories = [];
+  let productArray = await getAllProducts();
+
+  productArray.forEach(element => {
+    if (!productCategories.includes(element.category)){
+      productCategories.push(element.category)
+    }
+  });
+  
+  return productCategories
 }
 
 

@@ -60,3 +60,8 @@ GET http://localhost:3000/products/20 HTTP/1.1
 GET http://localhost:3000/product/categories/tea HTTP/1.1
 
 ###
+
+// get product categories
+GET http://localhost:3000/product/categories/ HTTP/1.1
+
+###
