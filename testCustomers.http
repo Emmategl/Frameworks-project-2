@@ -10,7 +10,7 @@ GET http://localhost:3000/ HTTP/1.1
 ###
 
 // get basket
-GET http://localhost:3000/customers/20/basket HTTP/1.1
+GET http://localhost:3000/customers/23/basket HTTP/1.1
 
 ###
 

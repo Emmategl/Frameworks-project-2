@@ -101,26 +101,51 @@ export async function addToBasket(customer, productID) {
 }
 
 // return all products from file
-export async function getBasket() { /* customerID */
-  try {
-    let basketTxt = await fs.readFile(BASKET_FILE);
-    let basket = JSON.parse(basketTxt);
-    return basket
-  } catch (err) {
-    if (err.code === "ENOENT") {
-      // file does not exits
-      await save([]); // create a new file with ampty array
-      return []; // return empty array
-    } // // cannot handle this exception, so rethrow
-    else throw err;
-  }
-}
+/* export async function getBasket() { /* customerID */
+/*   try { */
+/*     let basketTxt = await fs.readFile(CUSTOMERS_FILE); */
+/*     let basket = JSON.parse(basketTxt); */
+/*     return basket */
+/*   } catch (err) { */
+/*     if (err.code === "ENOENT") { */
+/*       // file does not exits */
+/*       await save([]); // create a new file with ampty array */
+/*       return []; // return empty array */
+/*     } // // cannot handle this exception, so rethrow */
+/*     else throw err; */
+/*   } */
+/* } */
+/*  */
 
 export async function getBasketByID(customerId) { /* customerID */
   let customerArray = await getAll();
-  let basketArray = await getBasket();
   let index = findCustomer(customerArray, customerId);
   if (index === -1)
     throw new Error(`Customer with ID:${customerId} doesn't exist`);
-  else return basketArray[index];
+  else return customerArray[index].basket;
 }
+
+/* // return all products from file */
+/* export async function getBasket() { /* customerID */
+/*   try { */
+/*     let basketTxt = await fs.readFile(BASKET_FILE); */
+/*     let basket = JSON.parse(basketTxt); */
+/*     return basket */
+/*   } catch (err) { */
+/*     if (err.code === "ENOENT") { */
+/*       // file does not exits */
+/*       await save([]); // create a new file with ampty array */
+/*       return []; // return empty array */
+/*     } // // cannot handle this exception, so rethrow */
+/*     else throw err; */
+/*   } */
+/* } */
+/*  */
+/* export async function getBasketByID(customerId) { /* customerID */
+/*   let customerArray = await getAll(); */
+/*   let basketArray = await getBasket(); */
+/*   let index = findCustomer(customerArray, customerId); */
+/*   if (index === -1) */
+/*     throw new Error(`Customer with ID:${customerId} doesn't exist`); */
+/*   else return basketArray[index]; */
+/* } */
