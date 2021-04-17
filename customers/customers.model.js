@@ -104,7 +104,8 @@ export async function removeFromBasket(product, customerId) {
   if (index === -1)
     throw new Error(`Customer with ID:${customerId} doesn't exist`);
   else {
-    customerArray[index].basket[1].splice(product, 1); // remove customer from array
+    /* customerArray[index].basket[1].splice(product, 1); // remove customer from array */
+    customerArray[index].basket.splice(product, 1);
     await save(customerArray);
   }
 }
