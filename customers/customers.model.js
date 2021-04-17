@@ -132,6 +132,31 @@ export async function getProductByID(productId) {
   else return productArray[index];
 }
 
+// get products categories
+export async function getProductCategories() {
+  let productsByCategory = [];
+  let productArray = await getAllProducts();
+  productsByCategory = productArray.filter(it => new RegExp('coffee').test(it.category))
+  return productsByCategory
+}
+
+export async function getProductByCategory(categorys) {
+  let productsByCategory = [];
+  let productArray = await getAllProducts();
+  productsByCategory = productArray.filter(it => new RegExp(categorys).test(it.category))
+  return productsByCategory
+}
+
+
+// get all coffees
+/* export async function getProductCategories() { */
+/*   let productsByCategory = []; */
+/*   let productArray = await getAllProducts(); */
+/*   productsByCategory = productArray.filter(it => new RegExp('coffee').test(it.category)) */
+/*   return productsByCategory */
+/* } */
+
+
 /* // return all products from file */
 /* export async function getBasket() { /* customerID */
 /*   try { */

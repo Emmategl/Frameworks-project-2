@@ -100,3 +100,24 @@ export async function getProduct (req, res) {
     res.status(400).send(error.message);
   }
 }
+
+export async function getProductCategories (req, res) {
+  try {
+    let productCat = await customerModel.getProductCategories();
+    res.json(productCat);
+  } catch (error) {
+    // res.statusMessage=
+    res.status(400).send(error.message);
+  }
+}
+
+export async function getProductByCategory (req, res) {
+  try {
+    let category = req.params.category
+    let productByCat = await customerModel.getProductByCategory(category);
+    res.json(productByCat);
+  } catch (error) {
+    // res.statusMessage=
+    res.status(400).send(error.message);
+  }
+}

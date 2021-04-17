@@ -7,7 +7,7 @@
     "img_path": "Images/Teas/12.png",
     "description": "Tasting notes: Cool mint, Ginger, Spices",
     "popularity": 3,
-    "type": "tea",
+    "category": "tea",
     "longDescription": "A true classic in herbal tea. Cool Mint is without a doubt our best selling herbal tea. Cool Mint tea is a wonderful herbal tea of various herbs, including peppermint, spiced with lemongrass and ginger. Refreshing and delicious. Cool Mint herbal tea can also be enjoyed as iced tea on a warm summer day. "
    },
    {
@@ -17,7 +17,7 @@
     "img_path": "Images/Coffees/3.png",
     "description": "Tasting notes: Toffee, Cinnamon, Lemon",
     "popularity": 1,
-    "type": "coffee",
+    "category": "coffee",
     "longDescription": "This variant is called House Blend and is the first coffee that Starbucks created and it has been with them ever since. The coffee comes from South and Central America and is medium roasted 100% Arabica. The frugal roasting gives a mild caramelized taste with notes of nuts and mild sweetness. This Starbucks for Nespresso is recommended as a lungo."
 },
    {
@@ -27,7 +27,7 @@
         "img_path": "Images/Teas/13.png",
         "description": "Tasting notes: Cinnamon, Cardamom, Ginger",
         "popularity": 1,
-        "type": "tea",
+        "category": "tea",
         "longDescription": "Original chai with black tea and warming herbs. Contains a blend of five organic fair-trade herbs from small, self-employed farmers from around the world. Each ingredient is known to be healthy. Cinnamon and ginger are warming herbs. Cardamom is deliciously aromatic."
    },
    {
@@ -37,7 +37,7 @@
         "img_path": "Images/Teas/14.png",
         "description": "Tasting notes: Vegetal, Bitterness, Nuttiness",
         "popularity": 1,
-        "type": "tea",
+        "category": "tea",
         "longDescription": "This Matcha tea is of good quality and  is perfect to be enjoyed cooked in a Matcha bowl. The dried leaves are ground to a very fine powder that impresses with a soft and round feeling in the mouth. The tea has a pretty lovely umami and sweetness. What makes this Matcha easy to drink, is that it does not have the taste of grass and has a less bitter taste than other Matchas."
    },
      {
@@ -47,7 +47,7 @@
        "img_path": "Images/Coffees/1.png",
        "description": "Tasting notes: Grapefruit, Date, Honey",
        "popularity": 1,
-       "type": "coffee",
+       "category": "coffee",
        "longDescription": "This exclusive coffee originates from the Cerrado Mineiro region of Brazil. The wide range of flavors experienced with this Kenya coffee is the result of a great variety of cultivars, terroir (growth conditions) and processing methods. The coffee is grown 1099 meters above sea level. Kenya is a balanced and harmonious arabica coffee with a distinct structure that has flavor notes of apples, grapefruit, chocolate and honey."
    },
 
@@ -58,7 +58,7 @@
        "img_path": "Images/Coffees/4.png",
        "description": "Tasting notes: Caramel, Apple, Chocolate",
        "popularity": 2,
-       "type": "coffee",
+       "category": "coffee",
        "longDescription": "Caramel and coffee are an insanely good combination, where its strong taste of coffee is accompanied by the gentle and sweet taste of caramel. It gives you a delicious creamy cup of coffee. It's not because the taste of caramel is penetrating, but it just adds an extra dimension to the taste together with the taste of apple and chocolate."
    },
    {
@@ -68,7 +68,7 @@
        "img_path": "Images/Coffees/5.png",
        "description": "Tasting notes: Caramel, Chocolate, Raisins",
        "popularity": 2,
-       "type": "coffee",
+       "category": "coffee",
        "longDescription": "Another one of our great sweet coffees. Battlecheck coffee is a coffee with aromas of chocolate and raisins. The coffee has undertones of marzipan, plum and cane sugar. Great for a cold winter evening"
    },
    {
@@ -78,7 +78,7 @@
        "img_path": "Images/Coffees/6.png",
        "description": "Tasting notes: Flora, Lemon Drop, Honey",
        "popularity": 2,
-       "type": "coffee",
+       "category": "coffee",
        "longDescription": "This Ethiopian coffee is very special. The strong floral notes make it a quirk that is great to try. It is a cup that can impress guests and it fits super well as filter coffee. You must buy this coffee if you want to try something special and fun, as well as want to see the coffee disappear quickly, because this Ethiopian coffee is hard not to brew again and again."
    },
    {
@@ -88,7 +88,7 @@
        "img_path": "Images/Coffees/7.png",
        "description": "Tasting notes: Pear, Cardamom, Star anise",
        "popularity": 2,
-       "type": "coffee",
+       "category": "coffee",
        "longDescription": "The coffee offers a slightly spicy aroma, with hints of cardamom and star anise. In the mouth, the spicy notes are complemented by a sweet pear taste as well as a rich acid, as when eating sun-ripened tomatoes. A really complex coffee that unites a full body with a strict elegance."
    },
    {
@@ -98,7 +98,7 @@
        "img_path": "Images/Coffees/8.png",
        "description": "Tasting notes: Milk chocolate, Dried fruit",
        "popularity": 4,
-       "type": "coffee",
+       "category": "coffee",
        "longDescription": "This coffee is characterized by being round and full-bodied. It has taste notes of almond, dried fruit and a aftertaste of milk chocolate. This coffee is grown 1000-1200 meters above sea level and the processing method is natural, which gives body and a sweet character."
    },
    {
@@ -108,7 +108,7 @@
     "img_path": "Images/Teas/20.png",
     "description": "Tasting notes: Vanilla, Orange, Honey.",
     "popularity": 4,
-    "type": "tea",
+    "category": "tea",
     "longDescription": "With this fruit tea, you get not just a fruity tea, but a tea where the interplay of ingredients goes in extremely good harmony. While orange juice, vanilla and honey add a fresh sweetness to the tea, small fine orange peels give the tea a refreshing taste."
 },
    {
@@ -118,7 +118,7 @@
        "img_path": "Images/Coffees/9.png",
        "description": "Tasting notes: Rose, Elderflower, Lime",
        "popularity": 4,
-       "type": "coffee",
+       "category": "coffee",
        "longDescription": "Our Elderflower Medium Roast coffee is a luxurious, naturally flavored, medium roast coffee with Elderflowers, Hibiscus Flower and Rose Hips that you can enjoy hot or cold! The coffee connoisseur in you will truly enjoy the Elderflower balanced flavor and aroma!"
    },
    {
@@ -128,7 +128,7 @@
        "img_path": "Images/Coffees/10.png",
        "description": "Tasting notes: Spicy red wine, Nutmeg",
        "popularity": 4,
-       "type": "coffee",
+       "category": "coffee",
        "longDescription": "This coffee has a sweet and floral taste with notes of peach, nutmeg and a soft rounding of chocolate. Limu is recognized around the world as a gourmet coffee with a gentle red wine taste. The sweetness and lightness of the Limu bean makes the coffee perfect for being drunk all day long."
    },
 
@@ -139,7 +139,7 @@
     "img_path": "Images/Coffees/2.png",
     "description": "Tasting notes: Caramel, Chocolate, Red fruits",
     "popularity": 4,
-    "type": "coffee",
+    "category": "coffee",
     "longDescription": "This is an exclusive blend of finely ground and medium roasted exquisite Arabica beans. The taste is nice round with a good balance between sweetness and acidity and flavor nuances like fruit and flowers mixed with chocolate, caramel and honey."
    
 },
@@ -151,7 +151,7 @@
         "img_path": "Images/Teas/11.png",
         "description": "Tasting notes: Cacao, Chocolate, Honey, Vanilla",
         "popularity": 4,
-        "type": "tea",
+        "category": "tea",
         "longDescription": "Black tea from Ceylon and China with dark chocolate and cocoa bean peel. Slightly sweet, soft and creamy. Tastes great with a dash of milk and a little sugar for a more creamy and sweet experience that highlights the chocolate taste, but is also wonderful without."
    },
    {
@@ -161,7 +161,7 @@
         "img_path": "Images/Teas/15.png",
         "description": "Tasting notes: Ginger, Chili, Peppermint",
         "popularity": 4,
-        "type": "tea",
+        "category": "tea",
         "longDescription": "If you like licorice, but would like a little more kick then this taste of peppermint, chili and ginger, is just for you. We developed it because more customers demanded a slightly stronger herbal tea with chili. And the demand shows that with this ginger tea we have hit what the customers want."
    },
    {
@@ -171,7 +171,7 @@
         "img_path": "Images/Teas/16.png",
         "description": "Tasting notes:  Pumpkin, Spices, Cinnamon",
         "popularity": 4,
-        "type": "tea",
+        "category": "tea",
         "longDescription": "Fantastic tasty black tea with a deep, warm taste of pumpkin and cinnamon. This wonderful tea will give you a nice warmth and direct your thoughts to a cozy winter day with indoor cosiness. This tea blend is made from black tea with added pumpkin seeds and cinnamon stick, which gives a very special and deep, warm taste - the combination of pumpkin and cinnamon is absolutely fantastic and tasty."
    },
    {
@@ -181,7 +181,7 @@
         "img_path": "Images/Teas/17.png",
         "description": "Tasting notes: Matcha, Vanilla, Apple, Pear",
         "popularity": 4,
-        "type": "tea",
+        "category": "tea",
         "longDescription": "Matcha tea is a traditional Japanese green tea. The tea is used at the special Japanese tea ceremony, where not only the intake but just as much the preparation of the tea is given great value. The tea is made from the leaves from the first harvest of the year - or 1st flush, as it is also called. By shielding the leaves from direct sunlight, a very concentrated content of chlorophyll is ensured, which gives the tea its characteristic jade green color."
    },
    {
@@ -191,7 +191,7 @@
         "img_path": "Images/Teas/18.png",
         "description": "Tasting notes: Lemon, Honey, Orange",
         "popularity": 4,
-        "type": "tea",
+        "category": "tea",
         "longDescription": "Lemon & Honey is another tea in the line of our popular herbal teas. It is a pure organic herbal tea made from only the very best ingredients such as organic lemongrass, organic apple, organic licorice root, organic pineapple pieces, organic lemon peel, organic honey and organic strawberry pieces."
    },
    {
@@ -201,7 +201,7 @@
         "img_path": "Images/Teas/19.png",
         "description": "Tasting notes: Bergamot, Citrus, Floral",
         "popularity": 4,
-        "type": "tea",
+        "category": "tea",
         "longDescription": "Everyone knows Earl Gray. Many people swear by the very special aroma taste that comes from the small citrus fruit, bergamot. Our Organic Earl Gray is a unique blend that we have created for you on black South Indian and Ceylon tea as well as bergamot. You get pleasant tea with the unmistakable aroma and taste of citrus."
    }
    ]
