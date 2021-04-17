@@ -1,7 +1,6 @@
 import * as fs from "fs/promises";
 const CUSTOMERS_FILE = "./customers/customers.json";
 const PRODUCTS_FILE = "./customers/products.json";
-const BASKET_FILE = "./customers/basket.json";
 
 // return all customer from file
 export async function getAll() {
@@ -28,13 +27,6 @@ async function save(customers = []) {
 // test function for customer ID
 function findCustomer(customerArray, Id) {
   return customerArray.findIndex(
-    (currCustomer) => currCustomer.customerId === Id
-  );
-}
-
-// test function for customer ID
-function findProduct(basketArray, Id) {
-  return basketArray.findIndex(
     (currCustomer) => currCustomer.customerId === Id
   );
 }
@@ -104,6 +96,40 @@ export async function getBasketByID(customerId) { /* customerID */
   if (index === -1)
     throw new Error(`Customer with ID:${customerId} doesn't exist`);
   else return customerArray[index].basket;
+}
+
+/* PRODUCTS */
+// return all products from file
+export async function getAllProducts() {
+  try {
+    let productsTxt = await fs.readFile(PRODUCTS_FILE);
+    let products = JSON.parse(productsTxt);
+    return products;
+  } catch (err) {
+    if (err.code === "ENOENT") {
+      // file does not exits
+      await save([]); // create a new file with ampty array
+      return []; // return empty array
+    } // // cannot handle this exception, so rethrow
+    else throw err;
+  }
+}
+
+// test function for customer ID
+function findproduct(productsArray, Id) {
+  return productsArray.findIndex(
+    (currProduct) => currProduct.productId === Id
+  );
+}
+
+
+// get customer by ID
+export async function getProductByID(productId) {
+  let productArray = await getAllProducts();
+  let index = findproduct(productArray, productId);
+  if (index === -1)
+    throw new Error(`Product with ID:${productId} doesn't exist`);
+  else return productArray[index];
 }
 
 /* // return all products from file */

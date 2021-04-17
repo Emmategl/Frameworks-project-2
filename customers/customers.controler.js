@@ -77,3 +77,26 @@ export async function postBasket(req, res) {
     res.status(400).send(error.message);
   }
 }
+
+
+/* PRODUCTS*/
+export async function getAllProducts(req, res) {
+  try {
+      let allProducts = await customerModel.getAllProducts();
+      res.json(allProducts);
+  } catch (error) {
+    // res.statusMessage=
+    res.status(400).send(error.message);
+  }
+}
+
+export async function getProduct (req, res) {
+  try {
+    let id = parseInt(req.params.id)
+    let product = await customerModel.getProductByID(id);
+    res.json(product);
+  } catch (error) {
+    // res.statusMessage=
+    res.status(400).send(error.message);
+  }
+}
