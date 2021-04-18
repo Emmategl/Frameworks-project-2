@@ -31,7 +31,6 @@ export async function getImportantProductInfo() {
   return productArray
 }
 
-
 // find specific product
 export function findproduct(productsArray, Id) {
   return productsArray.findIndex(
@@ -39,23 +38,35 @@ export function findproduct(productsArray, Id) {
   );
 }
 
+// find specific product
+export function findCategory(productsArray, category) {
+  return productsArray.findIndex(
+    (currProduct) => currProduct.category === category
+  );
+}
+
 // get product by ID
 export async function getProductByID(productId) {
   let productArray = await getAllProducts();
   let index = findproduct(productArray, productId);
-  if (index === -1)
-    throw new Error(`Product with ID:${productId} doesn't exist`);
-  else return productArray[index];
+  if (index === -1){
+    throw new Error(`Product with ID: ${productId} doesn't exist`);
+  }
+  else {
+    return productArray[index];}
 }
 
 // return a list of all products in a given category
 export async function getProductByCategory(categorys) {
   let productsByCategory = [];
   let productArray = await getAllProducts();
+  let cat = findCategory(productArray, categorys);
+  if(cat === -1){
+    throw new Error(`Category with name: "${categorys}" doesn't exist`);}
+  else{
   productsByCategory = productArray.filter(({category}) => category === categorys)
   productsByCategory.forEach(elm=>delete elm.longDescription && delete elm.img_path && delete elm.popularity)
-  return productsByCategory
-
+  return productsByCategory}
 }
 
 // return a list of all the categories

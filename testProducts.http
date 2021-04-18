@@ -12,12 +12,13 @@ GET http://localhost:3000/products/5 HTTP/1.1
 
 ###
 
-// get product by category
-GET http://localhost:3000/product/categories/coffee HTTP/1.1
+// get all product categories
+GET http://localhost:3000/product/categories/ HTTP/1.1
 
 ###
 
-// get all product categories
-GET http://localhost:3000/product/categories/ HTTP/1.1
+
+// get product by category
+GET http://localhost:3000/product/categories/tea HTTP/1.1
 
 ###

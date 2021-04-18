@@ -15,10 +15,9 @@ export async function getAll() {
     return customers;
   } catch (err) {
     if (err.code === "ENOENT") {
-      // file does not exits
-      await save([]); // create a new file with ampty array
-      return []; // return empty array
-    } // // cannot handle this exception, so rethrow
+      await save([]);
+      return [];
+    }
     else throw err;
   }
 }
@@ -58,28 +57,35 @@ function findProductInBasket(customer, productIds) {
 export async function getByID(customerId) {
   let customerArray = await getAll();
   let index = findCustomer(customerArray, customerId);
-  if (index === -1)
+  if (index === -1){
     throw new Error(`Customer with ID:${customerId} doesn't exist`);
-  else return customerArray[index];
+  }
+  else {
+    return customerArray[index];
+  }
 }
 
 // create a new customer
 export async function add(newCustomer) {
   let customerArray = await getAll();
-  if (findCustomer(customerArray, newCustomer.customerId) !== -1 )
+  if (findCustomer(customerArray, newCustomer.customerId) !== -1 ){
     throw new Error(
       `Customer with Id:${newCustomer.customerId} already exists`
     );
+  }
+  else{
   customerArray.push(newCustomer);
   await save(customerArray);
+  } 
 }
 
 // update existing customer
 export async function update(customerId, customer) {
   let customerArray = await getAll();
   let index = findCustomer(customerArray, customerId); // findIndex
-  if (index === -1)
+  if (index === -1){
     throw new Error(`Customer with ID:${customerId} doesn't exist`);
+  }
   else {
     customerArray[index] = customer;
     await save(customerArray);
@@ -90,8 +96,9 @@ export async function update(customerId, customer) {
 export async function remove(customerId) {
   let customerArray = await getAll();
   let index = findCustomer(customerArray, customerId); // findIndex
-  if (index === -1)
+  if (index === -1){
     throw new Error(`Customer with ID:${customerId} doesn't exist`);
+  }
   else {
     customerArray.splice(index, 1); // remove customer from array
     await save(customerArray);
@@ -104,23 +111,17 @@ export async function remove(customerId) {
 export async function addToBasket(product, customerId) {
   let customerArray = await getAll();
   let productArray = await getAllProducts();
-
-  let index = findCustomer(customerArray, customerId);
-  if (index === -1){
-    throw new Error(`Customer with ID:${customerId} doesn't exist`);}
-
-  let prodIndex = findproduct(productArray, product.productId);
-  if (prodIndex === -1){
-    throw new Error(`Product with ID:${product.productId} doesn't exist`);}
-    
-  let index3 = findProductInBasket(customerArray[index], product.productId);
-
-  if(index3 > -1){
+  let customerIndex = findCustomer(customerArray, customerId);
+  if (customerIndex === -1){
+    throw new Error(`Customer with ID: ${customerId} doesn't exist`);}
+  let productIndex = findproduct(productArray, product.productId);
+  if (productIndex === -1){
+    throw new Error(`Product with ID: ${product.productId} doesn't exist`);}
+  let isProductInBasket = findProductInBasket(customerArray[customerIndex], product.productId);
+  if (isProductInBasket > -1){
     throw new Error(`Item with ID: ${product.productId} is already in the basket for customer with ID: ${customerId}`)} 
-  
   else {
-    customerArray[index].basket.push(product);}
-    
+    customerArray[customerIndex].basket.push(product);}
   await save(customerArray);
 }
 
@@ -128,12 +129,14 @@ export async function addToBasket(product, customerId) {
 export async function removeFromBasket(productIds, customerId) {
   let customerArray = await getAll();
   let index = findCustomer(customerArray, customerId); // findIndex
-  if (index === -1)
+  if (index === -1){
     throw new Error(`Customer with ID: ${customerId} doesn't exist`);
+  }
   let isProductInBasket = findProductInBasket(customerArray[index], productIds); // findIndex
   let productIndex = findProductIndex(customerArray[index], productIds); // findIndex
-  if (isProductInBasket === -1)
-      throw new Error(`Product with ID: ${productIds} is not in the basket`);
+  if (isProductInBasket === -1){
+      throw new Error(`Product with ID: ${productIds} is not in the basket for customer with ID: ${customerId}`);
+  }
   else {
    customerArray[index].basket.splice(productIndex, 1)
     await save(customerArray);
@@ -142,15 +145,19 @@ export async function removeFromBasket(productIds, customerId) {
 
 // get a specific basket by customer ID
 export async function getSimpleBasket(customerId) {
+  let currentBasket = []
   let customerArray = await getAll();
   let index = findCustomer(customerArray, customerId);
   if (index === -1){
-    throw new Error(`Customer with ID:${customerId} doesn't exist`);}
-    
+    throw new Error(`Customer with ID: ${customerId} doesn't exist`);
+  }
   else {
-    return customerArray[index].basket}
+    for (let i = 0; i < customerArray[index].basket.length; i++) {
+        currentBasket.push(customerArray[index].basket[i])
+    }
+    return currentBasket
+  }
 }
-
 
 //display all product information inside customers basket
 export async function getFullBasketInfo(customerId) {
@@ -158,10 +165,11 @@ export async function getFullBasketInfo(customerId) {
   let customerArray = await getAll();
   let index = findCustomer(customerArray, customerId);
   if (index === -1){
-    throw new Error(`Customer with ID:${customerId} doesn't exist`);}
+    throw new Error(`Customer with ID: ${customerId} doesn't exist`);
+  }
   else {
     let displayBasket = change(productArray, customerArray[index].basket)
-  return displayBasket
+    return displayBasket
   }
 }
 
@@ -169,9 +177,9 @@ export async function getFullBasketInfo(customerId) {
 export async function change(productArray, basket){
   let currentBasket = []
   let basketDescription = []
-  for (let i = 0; i < basket.length; i++) {
-    currentBasket.push(basket[i].productId)}
-
+  for (let i = 0; i < basket.length; i++){
+      currentBasket.push(basket[i].productId)
+    }
   productArray.forEach(product=> {
       if(currentBasket.includes(product.productId)){
         basketDescription.push(product)
