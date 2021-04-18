@@ -33,6 +33,14 @@ DELETE  http://localhost:3000/customers/5 HTTP/1.1
 
 ### Basket ###
 
+// add product to basket for specific costumer id
+POST http://localhost:3000/customers/30/basket HTTP/1.1
+content-type: application/json
+
+{"productId":19}
+
+###
+
 // get basket for specific costumerID display with only productID
 GET http://localhost:3000/customers/30/basket HTTP/1.1
 
@@ -43,16 +51,8 @@ GET http://localhost:3000/customers/30/baskets HTTP/1.1
 
 ###
 
-// add product to basket for specific costumer id
-POST http://localhost:3000/customers/30/basket HTTP/1.1
-content-type: application/json
-
-{"productId":16}
-
-###
-
 // delete product id from basket for specific costumer id
-DELETE  http://localhost:3000/customers/30/basket/16 HTTP/1.1
+DELETE  http://localhost:3000/customers/30/basket/17 HTTP/1.1
 
 ###
 

@@ -36,6 +36,14 @@ function findCustomer(customerArray, Id) {
   );
 }
 
+// find index of specific product
+function findProductIndex(customerArray, Id) {
+  return customerArray.basket.findIndex(
+    (currCustomer) => currCustomer.productId === Id
+  );
+}
+
+
 // see if a product is in the basket of a specific customer
 function findProductInBasket(customer, productIds) {
   let basketItems = JSON.stringify(customer.basket);
@@ -129,12 +137,13 @@ export async function removeFromBasket(productIds, customerId) {
   let customerArray = await getAll();
   let index = findCustomer(customerArray, customerId); // findIndex
   if (index === -1)
-    throw new Error(`Customer with ID:${customerId} doesn't exist`);
-  let prodIndex = findProductInBasket(customerArray[index], productIds); // findIndex
-  if (prodIndex === -1)
-      throw new Error(`Product with ID:${productIds} is not in the basket`);
+    throw new Error(`Customer with ID: ${customerId} doesn't exist`);
+  let isProductInBasket = findProductInBasket(customerArray[index], productIds); // findIndex
+  let productIndex = findProductIndex(customerArray[index], productIds); // findIndex
+  if (isProductInBasket === -1)
+      throw new Error(`Product with ID: ${productIds} is not in the basket`);
   else {
-    customerArray[index].basket.splice(customerArray[index].basket.productids, 1)
+   customerArray[index].basket.splice(productIndex, 1)
     await save(customerArray);
   }
 }
@@ -147,12 +156,9 @@ export async function getBasket(customerId) {
   if (index === -1){
     throw new Error(`Customer with ID:${customerId} doesn't exist`);}
   else {
-    let e = change(productArray, customerArray[index].basket)
-  return e
+    let displayBasket = change(productArray, customerArray[index].basket)
+  return displayBasket
   }
-  /* else {
-    return customerArray[index].basket;
-  } */
 }
 
 export async function change(productArray, basket){
@@ -174,32 +180,3 @@ export async function change(productArray, basket){
   basketDescription.forEach(elm=>delete elm.longDescription && delete elm.popularity)
   return basketDescription
 }
-
-
-/* export async function change(productArray, basket){
-  console.log(basket)
-  let news = []
-  let news2 = []
-  let hi = []
-  for (let i = 0; i < basket.length; i++) {
-    news.push(basket[i].productId)
-    console.log(basket[i].productId)
-  }
-
-  for (let i = 0; i < productArray.length; i++) {
-    news2.push(productArray[i].productId)
-    console.log(productArray[i].productId)
-  }
-
-  for (let i = 0; i < news2.length; i++) {
-  news2.forEach(element => {
-    console.log(element)
-    console.log(news)
-    if(element == news[i]){
-      console.log("hi")
-      hi.push(productArray.productId[i])
-      
-    }
-  });
-}}
- */
