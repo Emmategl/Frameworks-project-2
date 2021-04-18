@@ -32,7 +32,3 @@ customerRouter.get("/products/:id", getProduct);
 customerRouter.get("/product/categories", getProductCategories);
 
 customerRouter.get("/product/categories/:category", getProductByCategory);
-
-/* customerRouter.put("/customers/:id/basket", changeBasket); */
-/*  */
-/* customerRouter.delete("/customers/:id/basket", DeleteFromBasket); */

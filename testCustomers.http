@@ -10,7 +10,7 @@ GET http://localhost:3000/ HTTP/1.1
 ###
 
 // get basket
-GET http://localhost:3000/customers/30/basket HTTP/1.1
+GET http://localhost:3000/customers/31/basket HTTP/1.1
 
 ###
 
@@ -32,7 +32,7 @@ DELETE  http://localhost:3000/customers/30/basket/3 HTTP/1.1
 POST http://localhost:3000/customers HTTP/1.1
 content-type: application/json
 
-{"customerId":1, "customerName": "Yes Peterson", "basket": []}
+{"customerId":5, "customerName": "Yessir Peterson", "basket": []}
 ###
 
 // get customer by id
@@ -41,14 +41,14 @@ GET http://localhost:3000/customers/30 HTTP/1.1
 ###
 
 // update customer
-PUT  http://localhost:3000/customers/15 HTTP/1.1
+PUT  http://localhost:3000/customers/5 HTTP/1.1
 content-type: application/json
 
-{"customerId":15, "customerName": "John Johnson UPDATED!"}
+{"customerId":5, "customerName": "John Johnson UPDATED!"}
 ###
 
 // delete customer
-DELETE  http://localhost:3000/customers/15 HTTP/1.1
+DELETE  http://localhost:3000/customers/5 HTTP/1.1
 
 ###
 
@@ -71,7 +71,7 @@ GET http://localhost:3000/product/categories/coffee HTTP/1.1
 
 ###
 
-// get product categories
+// get all product categories
 GET http://localhost:3000/product/categories/ HTTP/1.1
 
 ###

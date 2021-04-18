@@ -3,7 +3,10 @@ import * as fs from "fs/promises";
 const CUSTOMERS_FILE = "./customers/customers.json";
 const PRODUCTS_FILE = "./customers/products.json";
 
-// return all customer from file
+
+/* CUSTOMERS */
+
+// return a list of all customers
 export async function getAll() {
   try {
     let customersTxt = await fs.readFile(CUSTOMERS_FILE);
@@ -19,20 +22,20 @@ export async function getAll() {
   }
 }
 
-// save array of customers to file
+// save array of customers
 async function save(customers = []) {
   let customersTxt = JSON.stringify(customers);
   await fs.writeFile(CUSTOMERS_FILE, customersTxt);
 }
 
-// test function for customer ID
+// find specific customer
 function findCustomer(customerArray, Id) {
   return customerArray.findIndex(
     (currCustomer) => currCustomer.customerId === Id
   );
 }
 
-// look for product in customer's basket
+// see if a product is in the basket of a specific customer
 function findProductInBasket(customer, productIds) {
   let basketItems = JSON.stringify(customer.basket);
   let product = productIds.toString();
@@ -42,7 +45,6 @@ function findProductInBasket(customer, productIds) {
   return -1
   }
  
-
 // get customer by ID
 export async function getByID(customerId) {
   let customerArray = await getAll();
@@ -55,15 +57,12 @@ export async function getByID(customerId) {
 // create a new customer
 export async function add(newCustomer) {
   let customerArray = await getAll();
-  /* let basketArray = await getBasket(); */
   if (findCustomer(customerArray, newCustomer.customerId) !== -1 )
     throw new Error(
       `Customer with Id:${newCustomer.customerId} already exists`
     );
   customerArray.push(newCustomer);
-  /* basketArray.push(newCustomer); */
   await save(customerArray);
-  /* await save(basketArray); */
 }
 
 // update existing customer
@@ -90,30 +89,33 @@ export async function remove(customerId) {
   }
 }
 
-/*BASKET */
+/* BASKET */
 
 // add a product to basket
 export async function addToBasket(product, customerId) {
   let customerArray = await getAll();
   let productArray = await getAllProducts();
   let index = findCustomer(customerArray, customerId);
-  if (index === -1)
-  throw new Error(`Customer with ID:${customerId} doesn't exist`);
+
+  if (index === -1){
+    throw new Error(`Customer with ID:${customerId} doesn't exist`);}
   let prodIndex = findproduct(productArray, product.productId);
-  if (prodIndex === -1)
-  throw new Error(`Product with ID:${product.productId} doesn't exist`);
-  let index3 = findProductInBasket(customerArray[index], product.productId); 
+
+  if (prodIndex === -1){
+    throw new Error(`Product with ID:${product.productId} doesn't exist`);}
+  let index3 = findProductInBasket(customerArray[index], product.productId);
+
   if(index3 > -1){
-    throw new Error(`Item with ID: ${product.productId} is already in the basket for customer with ID: ${customerId}`) 
-   } 
-  else{
-    customerArray[index].basket.push(product);
-  }
+    throw new Error(`Item with ID: ${product.productId} is already in the basket for customer with ID: ${customerId}`)} 
   
+  else {
+    customerArray[index].basket.push(product);}
+    
   await save(customerArray);
 }
 
-export async function getBasketByID(customerId) { /* customerID */
+// get a specific basket by customer ID
+export async function getBasketByID(customerId) {
   let customerArray = await getAll();
   let index = findCustomer(customerArray, customerId);
   if (index === -1)
@@ -121,7 +123,7 @@ export async function getBasketByID(customerId) { /* customerID */
   else return customerArray[index].basket;
 }
 
-// delete product from basket
+// delete a product from a customers basket
 export async function removeFromBasket(productIds, customerId) {
   let customerArray = await getAll();
   let index = findCustomer(customerArray, customerId); // findIndex
@@ -137,7 +139,8 @@ export async function removeFromBasket(productIds, customerId) {
 }
 
 /* PRODUCTS */
-// return all products from file
+
+// return a list of all products and all details
 export async function getAllProducts() {
   try {
     let productsTxt = await fs.readFile(PRODUCTS_FILE);
@@ -145,33 +148,31 @@ export async function getAllProducts() {
     return products;
   } catch (err) {
     if (err.code === "ENOENT") {
-      // file does not exits
-      await save([]); // create a new file with ampty array
-      return []; // return empty array
-    } // // cannot handle this exception, so rethrow
+      await save([]);
+      return [];
+    }
     else throw err;
   }
 }
 
+// return af list of all product and the most important details
 export async function getImportantProductInfo() {
   let newd = [];
   let productArray = await getAllProducts();
-  newd = productArray.map(e=>Object.assign({},e))  // new array of copies
+  newd = productArray.map(e=>Object.assign({},e))
   productArray.forEach(elm=>delete elm.longDescription && delete elm.img_path && delete elm.popularity)
   return productArray
 }
 
 
-
-// test function for customer ID
+// find specific product
 function findproduct(productsArray, Id) {
   return productsArray.findIndex(
     (currProduct) => currProduct.productId === Id
   );
 }
 
-
-// get customer by ID
+// get product by ID
 export async function getProductByID(productId) {
   let productArray = await getAllProducts();
   let index = findproduct(productArray, productId);
@@ -180,7 +181,7 @@ export async function getProductByID(productId) {
   else return productArray[index];
 }
 
-//get product by category
+// return a list of all products in a given category
 export async function getProductByCategory(categorys) {
   let productsByCategory = [];
   let productArray = await getAllProducts();
@@ -190,7 +191,7 @@ export async function getProductByCategory(categorys) {
 
 }
 
-// get products categories
+// return a list of all the categories
 export async function getProductCategories() {
   let productCategories = [];
   let productArray = await getAllProducts();
@@ -203,38 +204,3 @@ export async function getProductCategories() {
   
   return productCategories
 }
-
-
-// get all coffees
-/* export async function getProductCategories() { */
-/*   let productsByCategory = []; */
-/*   let productArray = await getAllProducts(); */
-/*   productsByCategory = productArray.filter(it => new RegExp('coffee').test(it.category)) */
-/*   return productsByCategory */
-/* } */
-
-
-/* // return all products from file */
-/* export async function getBasket() { /* customerID */
-/*   try { */
-/*     let basketTxt = await fs.readFile(BASKET_FILE); */
-/*     let basket = JSON.parse(basketTxt); */
-/*     return basket */
-/*   } catch (err) { */
-/*     if (err.code === "ENOENT") { */
-/*       // file does not exits */
-/*       await save([]); // create a new file with ampty array */
-/*       return []; // return empty array */
-/*     } // // cannot handle this exception, so rethrow */
-/*     else throw err; */
-/*   } */
-/* } */
-/*  */
-/* export async function getBasketByID(customerId) { /* customerID */
-/*   let customerArray = await getAll(); */
-/*   let basketArray = await getBasket(); */
-/*   let index = findCustomer(customerArray, customerId); */
-/*   if (index === -1) */
-/*     throw new Error(`Customer with ID:${customerId} doesn't exist`); */
-/*   else return basketArray[index]; */
-/* } */

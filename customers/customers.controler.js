@@ -1,5 +1,7 @@
 import * as customerModel from "./customers.model.js";
 
+/* Customers */
+
 export async function getAllCustomers(req, res) {
     try {
         let allCustomers = await customerModel.getAll();
@@ -55,6 +57,7 @@ export async function postCustomer(req, res) {
   }
 
 /* Basket */
+
 export async function getBasket (req, res) {
   try {
     let id = parseInt(req.params.id)
@@ -92,6 +95,7 @@ export async function deleteProduct (req, res) {
 
 
 /* PRODUCTS*/
+
 export async function getAllProducts(req, res) {
   try {
       let allProducts = await customerModel.getAllProducts();
