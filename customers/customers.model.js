@@ -32,37 +32,16 @@ function findCustomer(customerArray, Id) {
   );
 }
 
-// test function for customer ID
+// look for product in customer's basket
 function findProductInBasket(customer, productIds) {
-  /* let h = customer.basket.toString(); */
-  let h = JSON.stringify(customer.basket);
-  let c = productIds.toString();
-
-  console.log(h)
-  console.log(c)
-  if(h.includes(c)){
-    console.log("true")
-    return true
+  let basketItems = JSON.stringify(customer.basket);
+  let product = productIds.toString();
+  if(basketItems.includes(product)){
+    return 1
   }
-  /* if(e.includes(productIds)){
-    console.log("true")
-    return true
-  } */
-  /* if(customer.basket.find(productIds)){ */
-  /*   console.log("true") */
-  /*   return true */
-  /* } */
-  /* else{ */
-  console.log(customer)
-  console.log(customer.basket)
-  console.log(customer.basket.productId)
-  console.log(productIds)
-  console.log("false2")
-  return false
+  return -1
   }
  
-
-
 
 // get customer by ID
 export async function getByID(customerId) {
@@ -123,10 +102,10 @@ export async function addToBasket(product, customerId) {
   let prodIndex = findproduct(productArray, product.productId);
   if (prodIndex === -1)
   throw new Error(`Product with ID:${product.productId} doesn't exist`);
-  /* let index3 = findProductInBasket(customerArray, product.productId); */
-  /* if(index3 > -1){ */
-  /*     console.log("quantitiy changed") */
-  /* } */
+  let index3 = findProductInBasket(customerArray[index], product.productId); 
+  if(index3 > -1){
+    throw new Error(`Item with ID: ${product.productId} is already in the basket for customer with ID: ${customerId}`) 
+   } 
   else{
     customerArray[index].basket.push(product);
   }
@@ -144,17 +123,15 @@ export async function getBasketByID(customerId) { /* customerID */
 
 // delete product from basket
 export async function removeFromBasket(productIds, customerId) {
-  console.log("im here")
   let customerArray = await getAll();
   let index = findCustomer(customerArray, customerId); // findIndex
   if (index === -1)
     throw new Error(`Customer with ID:${customerId} doesn't exist`);
   let prodIndex = findProductInBasket(customerArray[index], productIds); // findIndex
-  console.log(prodIndex)
-  if (prodIndex === false)
+  if (prodIndex === -1)
       throw new Error(`Product with ID:${productIds} is not in the basket`);
   else {
-    console.log(customerArray[index].basket.splice(customerArray[index].basket.productids, 1))
+    customerArray[index].basket.splice(customerArray[index].basket.productids, 1)
     await save(customerArray);
   }
 }

@@ -1,1 +1,1 @@
-[{"customerId":30,"customerName":"Emma Peterson","basket":[]},{"customerId":31,"customerName":"Lone Peterson","basket":[]},{"customerId":1,"customerName":"Yes Peterson","basket":[]}]
+[{"customerId":30,"customerName":"Emma Peterson","basket":[{"productId":4}]},{"customerId":31,"customerName":"Lone Peterson","basket":[]},{"customerId":1,"customerName":"Yes Peterson","basket":[]}]
