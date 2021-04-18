@@ -1,20 +1,44 @@
 
-// get all customers
+### Customers ###
+
+// get a list of all customers
 GET http://localhost:3000/customers HTTP/1.1
 
 ###
 
-// 
-GET http://localhost:3000/ HTTP/1.1
+// create a customer
+POST http://localhost:3000/customers HTTP/1.1
+content-type: application/json
+
+{"customerId":5, "customerName": "Yessir Peterson", "basket": []}
+###
+
+// get a customer by id
+GET http://localhost:3000/customers/30 HTTP/1.1
 
 ###
 
-// get basket
+// update a customer by id
+PUT  http://localhost:3000/customers/5 HTTP/1.1
+content-type: application/json
+
+{"customerId":5, "customerName": "John Johnson UPDATED!"}
+###
+
+// delete customer by id
+DELETE  http://localhost:3000/customers/5 HTTP/1.1
+
+###
+
+
+### Basket ###
+
+// get basket for specific costumer id
 GET http://localhost:3000/customers/30/basket HTTP/1.1
 
 ###
 
-// add to basket
+// add product to basket for specific costumer id
 POST http://localhost:3000/customers/30/basket HTTP/1.1
 content-type: application/json
 
@@ -22,56 +46,10 @@ content-type: application/json
 
 ###
 
-// delete product
+// delete product id from basket for specific costumer id
 DELETE  http://localhost:3000/customers/30/basket/4 HTTP/1.1
 
 ###
 
 
-// create customer
-POST http://localhost:3000/customers HTTP/1.1
-content-type: application/json
 
-{"customerId":5, "customerName": "Yessir Peterson", "basket": []}
-###
-
-// get customer by id
-GET http://localhost:3000/customers/30 HTTP/1.1
-
-###
-
-// update customer
-PUT  http://localhost:3000/customers/5 HTTP/1.1
-content-type: application/json
-
-{"customerId":5, "customerName": "John Johnson UPDATED!"}
-###
-
-// delete customer
-DELETE  http://localhost:3000/customers/5 HTTP/1.1
-
-###
-
-// get all information about all products
-GET http://localhost:3000/products HTTP/1.1
-
-###
-
-// get all important product info
-GET http://localhost:3000/products/info HTTP/1.1
-###
-
-// get product by id
-GET http://localhost:3000/products/5 HTTP/1.1
-
-###
-
-// get product by category
-GET http://localhost:3000/product/categories/coffee HTTP/1.1
-
-###
-
-// get all product categories
-GET http://localhost:3000/product/categories/ HTTP/1.1
-
-###
