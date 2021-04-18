@@ -46,11 +46,11 @@ function findProductIndex(customerArray, Id) {
 
 // see if a product is in the basket of a specific customer
 function findProductInBasket(customer, productIds) {
-  let basketItems = JSON.stringify(customer.basket);
   let product = productIds.toString();
-  if(basketItems.includes(product)){
-    return 1
-  }
+  for(var i = 0; i < customer.basket.length; i++) {
+    if (customer.basket[i].productId == product) {
+      return 1
+    }}
   return -1
   }
  
@@ -104,14 +104,15 @@ export async function remove(customerId) {
 export async function addToBasket(product, customerId) {
   let customerArray = await getAll();
   let productArray = await getAllProducts();
-  let index = findCustomer(customerArray, customerId);
 
+  let index = findCustomer(customerArray, customerId);
   if (index === -1){
     throw new Error(`Customer with ID:${customerId} doesn't exist`);}
-  let prodIndex = findproduct(productArray, product.productId);
 
+  let prodIndex = findproduct(productArray, product.productId);
   if (prodIndex === -1){
     throw new Error(`Product with ID:${product.productId} doesn't exist`);}
+    
   let index3 = findProductInBasket(customerArray[index], product.productId);
 
   if(index3 > -1){
