@@ -10,23 +10,23 @@ GET http://localhost:3000/customers HTTP/1.1
 POST http://localhost:3000/customers HTTP/1.1
 content-type: application/json
 
-{"customerId":5, "customerName": "Yessir Peterson", "basket": []}
+{"customerId":4, "customerName": "Ida Idasen", "basket": []}
 ###
 
 // get a customer by id
-GET http://localhost:3000/customers/30 HTTP/1.1
+GET http://localhost:3000/customers/2 HTTP/1.1
 
 ###
 
 // update a customer by id
-PUT  http://localhost:3000/customers/5 HTTP/1.1
+PUT  http://localhost:3000/customers/4 HTTP/1.1
 content-type: application/json
 
-{"customerId":5, "customerName": "John Johnson UPDATED!"}
+{"customerId":4, "customerName": "Ida Idasen UPDATED!"}
 ###
 
 // delete customer by id
-DELETE  http://localhost:3000/customers/5 HTTP/1.1
+DELETE  http://localhost:3000/customers/4 HTTP/1.1
 
 ###
 
@@ -34,25 +34,25 @@ DELETE  http://localhost:3000/customers/5 HTTP/1.1
 ### Basket ###
 
 // add product to basket for specific costumer id
-POST http://localhost:3000/customers/30/basket HTTP/1.1
+POST http://localhost:3000/customers/3/basket HTTP/1.1
 content-type: application/json
 
-{"productId":5}
+{"productId":6}
 
 ###
 
 // get basket for specific costumerID display with only productID
-GET http://localhost:3000/customers/30/basket HTTP/1.1
+GET http://localhost:3000/customers/2/basket HTTP/1.1
 
 ###
 
 // get basket for specific costumerID with more detailed product description
-GET http://localhost:3000/customers/30/baskets HTTP/1.1
+GET http://localhost:3000/customers/2/baskets HTTP/1.1
 
 ###
 
 // delete product id from basket for specific costumer id
-DELETE  http://localhost:3000/customers/30/basket/4 HTTP/1.1
+DELETE  http://localhost:3000/customers/2/basket/8 HTTP/1.1
 
 ###
 

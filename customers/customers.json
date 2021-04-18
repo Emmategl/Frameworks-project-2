@@ -1,1 +1,1 @@
-[{"customerId":30,"customerName":"Emma Peterson","basket":[{"productId":12},{"productId":5}]},{"customerId":31,"customerName":"Lone Peterson","basket":[]},{"customerId":1,"customerName":"Yes Peterson","basket":[]}]
+[{"customerId":1,"customerName":"Ole Olesen","basket":[{"productId":9},{"productId":5},{"productId":10}]},{"customerId":2,"customerName":"Carl Carlsen","basket":[{"productId":19},{"productId":3}]},{"customerId":3,"customerName":"Kirsten Kirstensen","basket":[{"productId":6}]},{"customerId":4,"customerName":"Ida Idasen","basket":[]}]

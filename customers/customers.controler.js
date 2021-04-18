@@ -58,16 +58,6 @@ export async function postCustomer(req, res) {
 
 /* Basket */
 
-export async function getBasket (req, res) {
-  try {
-    let id = parseInt(req.params.id)
-    let basket = await customerModel.getBasketByID(id);
-    res.json(basket);
-  } catch (error) {
-    // res.statusMessage=
-    res.status(400).send(error.message);
-  }
-}
 export async function postBasket(req, res) {
   try {
     let newProduct = req.body;
@@ -93,10 +83,21 @@ export async function deleteProduct (req, res) {
   }
 }
 
+export async function getBasket (req, res) {
+  try {
+    let id = parseInt(req.params.id)
+    let basket = await customerModel.getSimpleBasket(id);
+    res.json(basket);
+  } catch (error) {
+    // res.statusMessage=
+    res.status(400).send(error.message);
+  }
+}
+
 export async function getBasketInfo (req, res) {
   try {
     let id = parseInt(req.params.id)
-    let basket = await customerModel.getBasket(id);
+    let basket = await customerModel.getFullBasketInfo(id);
     res.json(basket);
   } catch (error) {
     // res.statusMessage=

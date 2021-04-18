@@ -124,15 +124,6 @@ export async function addToBasket(product, customerId) {
   await save(customerArray);
 }
 
-// get a specific basket by customer ID
-export async function getBasketByID(customerId) {
-  let customerArray = await getAll();
-  let index = findCustomer(customerArray, customerId);
-  if (index === -1)
-    throw new Error(`Customer with ID:${customerId} doesn't exist`);
-  else return customerArray[index].basket;
-}
-
 // delete a product from a customers basket
 export async function removeFromBasket(productIds, customerId) {
   let customerArray = await getAll();
@@ -149,8 +140,20 @@ export async function removeFromBasket(productIds, customerId) {
   }
 }
 
-//display all basket information in costumer
-export async function getBasket(customerId) {
+// get a specific basket by customer ID
+export async function getSimpleBasket(customerId) {
+  let customerArray = await getAll();
+  let index = findCustomer(customerArray, customerId);
+  if (index === -1){
+    throw new Error(`Customer with ID:${customerId} doesn't exist`);}
+    
+  else {
+    return customerArray[index].basket}
+}
+
+
+//display all product information inside customers basket
+export async function getFullBasketInfo(customerId) {
   let productArray = await getAllProducts();
   let customerArray = await getAll();
   let index = findCustomer(customerArray, customerId);
@@ -162,16 +165,12 @@ export async function getBasket(customerId) {
   }
 }
 
+// function to change from productId to full description of the specific product
 export async function change(productArray, basket){
-  console.log(basket)
   let currentBasket = []
-  let allProducts = []
   let basketDescription = []
   for (let i = 0; i < basket.length; i++) {
     currentBasket.push(basket[i].productId)}
-
-  for (let i = 0; i < productArray.length; i++) {
-    allProducts.push(productArray[i].productId)}
 
   productArray.forEach(product=> {
       if(currentBasket.includes(product.productId)){
