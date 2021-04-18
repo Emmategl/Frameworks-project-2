@@ -1,6 +1,7 @@
 import express from "express";
 
 import {customerRouter} from "./customers/customer.route.js";
+import {productRouter} from "./products/products.route.js";
 const app = express();
 const PORT = 3000;
 
@@ -9,6 +10,8 @@ app.use(express.json());
 
 // paths handled by quizzesRouter
 app.use(customerRouter)
+
+app.use(productRouter)
 
 app.get("/", (req, res) => res.send("Server 3: Hello World!"));
 

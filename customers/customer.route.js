@@ -1,6 +1,6 @@
 // index.js
 import express from 'express'
-import {getAllCustomers, postCustomer, getCustomer,putCustomer, deleteCustomer, getBasket, postBasket, getAllProducts, getProduct, getProductCategories, getProductByCategory, deleteProduct, getImportantInfo} from './customers.controler.js'
+import {getAllCustomers, postCustomer, getCustomer,putCustomer, deleteCustomer, getBasket, postBasket, deleteProduct} from './customers.controler.js'
 
 export const customerRouter = express.Router();
 
@@ -23,12 +23,3 @@ customerRouter.get("/customers/:id/basket", getBasket);
 
 customerRouter.delete("/customers/:id/basket/:prodid", deleteProduct);
 
-customerRouter.get("/products", getAllProducts);
-
-customerRouter.get("/products/info", getImportantInfo);
-
-customerRouter.get("/products/:id", getProduct);
-
-customerRouter.get("/product/categories", getProductCategories);
-
-customerRouter.get("/product/categories/:category", getProductByCategory);
