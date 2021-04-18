@@ -104,12 +104,10 @@ export async function removeFromBasket(product, customerId) {
   if (index === -1)
     throw new Error(`Customer with ID:${customerId} doesn't exist`);
   else {
-    /* customerArray[index].basket[1].splice(product, 1); // remove customer from array */
     customerArray[index].basket.splice(product, 1);
     await save(customerArray);
   }
 }
-
 
 /* PRODUCTS */
 // return all products from file
@@ -127,6 +125,16 @@ export async function getAllProducts() {
     else throw err;
   }
 }
+
+export async function getImportantProductInfo() {
+  let newd = [];
+  let productArray = await getAllProducts();
+  newd = productArray.map(e=>Object.assign({},e))  // new array of copies
+  productArray.forEach(elm=>delete elm.longDescription && delete elm.img_path && delete elm.popularity)
+  return productArray
+}
+
+
 
 // test function for customer ID
 function findproduct(productsArray, Id) {
@@ -150,7 +158,9 @@ export async function getProductByCategory(categorys) {
   let productsByCategory = [];
   let productArray = await getAllProducts();
   productsByCategory = productArray.filter(({category}) => category === categorys)
+  productsByCategory.forEach(elm=>delete elm.longDescription && delete elm.img_path && delete elm.popularity)
   return productsByCategory
+
 }
 
 // get products categories

@@ -52,9 +52,13 @@ DELETE  http://localhost:3000/customers/15 HTTP/1.1
 
 ###
 
-// get all products
+// get all information about all products
 GET http://localhost:3000/products HTTP/1.1
 
+###
+
+// get all important product info
+GET http://localhost:3000/products/info HTTP/1.1
 ###
 
 // get product by id
@@ -63,7 +67,7 @@ GET http://localhost:3000/products/20 HTTP/1.1
 ###
 
 // get product by category
-GET http://localhost:3000/product/categories/tea HTTP/1.1
+GET http://localhost:3000/product/categories/coffee HTTP/1.1
 
 ###
 

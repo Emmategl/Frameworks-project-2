@@ -124,6 +124,16 @@ export async function getProductByCategory (req, res) {
   }
 }
 
+export async function getImportantInfo (req, res) {
+  try {
+    let productInfo = await customerModel.getImportantProductInfo();
+    res.json(productInfo);
+  } catch (error) {
+    // res.statusMessage=
+    res.status(400).send(error.message);
+  }
+}
+
 export async function getProductCategories (req, res) {
   try {
     let productCat = await customerModel.getProductCategories();
