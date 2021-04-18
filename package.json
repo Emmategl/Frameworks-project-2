@@ -1,14 +1,14 @@
 {
-  "name": "customer-api",
+  "name": "shop-api",
   "version": "1.0.0",
   "description": "",
-  "main": "customerAPI.js",
+  "main": "shopAPI.js",
   "scripts": {
-    "start": "node customerAPI.js",
+    "start": "node shopAPI.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Sinisa Neskovic",
+  "author": "Emma Lerche Teglbrænder",
   "license": "MIT",
   "type": "module",
   "dependencies": {
