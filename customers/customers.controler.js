@@ -93,4 +93,13 @@ export async function deleteProduct (req, res) {
   }
 }
 
-
+export async function getBasketInfo (req, res) {
+  try {
+    let id = parseInt(req.params.id)
+    let basket = await customerModel.getBasket(id);
+    res.json(basket);
+  } catch (error) {
+    // res.statusMessage=
+    res.status(400).send(error.message);
+  }
+}

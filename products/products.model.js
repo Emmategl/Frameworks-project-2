@@ -22,7 +22,6 @@ export async function getAllProducts() {
 }
 
 
-
 // return af list of all product and the most important details
 export async function getImportantProductInfo() {
   let newd = [];

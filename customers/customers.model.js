@@ -139,3 +139,67 @@ export async function removeFromBasket(productIds, customerId) {
   }
 }
 
+//display all basket information in costumer
+export async function getBasket(customerId) {
+  let productArray = await getAllProducts();
+  let customerArray = await getAll();
+  let index = findCustomer(customerArray, customerId);
+  if (index === -1){
+    throw new Error(`Customer with ID:${customerId} doesn't exist`);}
+  else {
+    let e = change(productArray, customerArray[index].basket)
+  return e
+  }
+  /* else {
+    return customerArray[index].basket;
+  } */
+}
+
+export async function change(productArray, basket){
+  console.log(basket)
+  let currentBasket = []
+  let allProducts = []
+  let basketDescription = []
+  for (let i = 0; i < basket.length; i++) {
+    currentBasket.push(basket[i].productId)}
+
+  for (let i = 0; i < productArray.length; i++) {
+    allProducts.push(productArray[i].productId)}
+
+  productArray.forEach(product=> {
+      if(currentBasket.includes(product.productId)){
+        basketDescription.push(product)
+      }
+  });
+  basketDescription.forEach(elm=>delete elm.longDescription && delete elm.popularity)
+  return basketDescription
+}
+
+
+/* export async function change(productArray, basket){
+  console.log(basket)
+  let news = []
+  let news2 = []
+  let hi = []
+  for (let i = 0; i < basket.length; i++) {
+    news.push(basket[i].productId)
+    console.log(basket[i].productId)
+  }
+
+  for (let i = 0; i < productArray.length; i++) {
+    news2.push(productArray[i].productId)
+    console.log(productArray[i].productId)
+  }
+
+  for (let i = 0; i < news2.length; i++) {
+  news2.forEach(element => {
+    console.log(element)
+    console.log(news)
+    if(element == news[i]){
+      console.log("hi")
+      hi.push(productArray.productId[i])
+      
+    }
+  });
+}}
+ */
