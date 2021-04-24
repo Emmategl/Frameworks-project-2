@@ -13,8 +13,6 @@ app.use(customerRouter)
 
 app.use(productRouter)
 
-app.get("/", (req, res) => res.send("Server 3: Hello World!"));
-
 // For invalid routes
 app.get("*", (req, res) => {
   res.send("404! This is an invalid URL.");

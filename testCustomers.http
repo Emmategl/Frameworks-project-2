@@ -42,36 +42,36 @@ content-type: application/json
 
 ###
 
-// get basket for specific costumerID - display with only productID
+// get basket for specific costumer - display with only productID
 GET http://localhost:3000/customers/1/basket HTTP/1.1
 
 ###
 
-// get basket for specific costumerID - display with more detailed product description
+// get basket for specific costumer - display with more detailed product description
 GET http://localhost:3000/customers/1/basketDetails HTTP/1.1
 
 ###
 
-// update quantity of product in basket to specific amount
+// update quantity of product in basket for specific costumer to specific quantity
 PUT  http://localhost:3000/customers/1/basket/60 HTTP/1.1
 content-type: application/json
 
 {"quantity": 2}
 ###
 
-// increment quantity of product in basket by 1
+// increment quantity of product in basket for specific costumer by 1
 PUT  http://localhost:3000/customers/1/basket/1/1 HTTP/1.1
 content-type: application/json
 
 ###
 
-// decrement quantity of product in basket by 1
+// decrement quantity of product in basket for specific costumer by 1
 PUT  http://localhost:3000/customers/1/basket/1/-1 HTTP/1.1
 content-type: application/json
 
 ###
 
-// delete product id from basket for specific costumer id
+// delete product from basket for specific costumer
 DELETE  http://localhost:3000/customers/1/basket/6 HTTP/1.1
 
 ###

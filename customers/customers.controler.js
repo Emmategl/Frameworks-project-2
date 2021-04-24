@@ -1,7 +1,5 @@
 import * as customerModel from "./customers.model.js";
 
-/* Customers */
-
 export async function getAllCustomers(req, res) {
     try {
         let allCustomers = await customerModel.getAllCustomers();

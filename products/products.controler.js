@@ -1,13 +1,10 @@
 import * as productModel from "./products.model.js";
 
-/* PRODUCTS*/
-
 export async function getAllProducts(req, res) {
   try {
       let allProducts = await productModel.getAllProducts();
       res.json(allProducts);
   } catch (error) {
-    // res.statusMessage=
     res.status(400).send(error.message);
   }
 }
@@ -18,7 +15,6 @@ export async function getProduct (req, res) {
     let product = await productModel.getProductByID(id);
     res.json(product);
   } catch (error) {
-    // res.statusMessage=
     res.status(400).send(error.message);
   }
 }
@@ -29,7 +25,6 @@ export async function getProductByCategory (req, res) {
     let productByCat = await productModel.getProductByCategory(category);
     res.json(productByCat);
   } catch (error) {
-    // res.statusMessage=
     res.status(400).send(error.message);
   }
 }
@@ -39,7 +34,6 @@ export async function getImportantInfo (req, res) {
     let productInfo = await productModel.getImportantProductInfo();
     res.json(productInfo);
   } catch (error) {
-    // res.statusMessage=
     res.status(400).send(error.message);
   }
 }
@@ -49,7 +43,6 @@ export async function getProductCategories (req, res) {
     let productCat = await productModel.getProductCategories();
     res.json(productCat);
   } catch (error) {
-    // res.statusMessage=
     res.status(400).send(error.message);
   }
 }

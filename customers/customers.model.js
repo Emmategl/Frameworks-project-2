@@ -24,14 +24,14 @@ export async function getAllCustomers() {
 
 // save array of customers
 export async function save(customers = []) {
-  let customersTxt = JSON.stringify(customers);
-  await fs.writeFile(CUSTOMERS_FILE, customersTxt);
+  let customerFile = JSON.stringify(customers);
+  await fs.writeFile(CUSTOMERS_FILE, customerFile);
 }
 
-// find specific customer
-function findCustomer(customerArray, Id) {
+// find index of specific customer
+function findCustomer(customerArray, cusId) {
   return customerArray.findIndex(
-    (currCustomer) => currCustomer.customerId === Id
+    (currCustomer) => currCustomer.customerId === cusId
   );
 }
 
@@ -82,7 +82,7 @@ export async function addCustomer(newCustomer) {
 // update existing customer
 export async function updateCustomer(customerId, customer) {
   let customerArray = await getAllCustomers();
-  let index = findCustomer(customerArray, customerId); // findIndex
+  let index = findCustomer(customerArray, customerId);
   if (index === -1){
     throw new Error(`Customer with ID: ${customerId} doesn't exist`);
   }
@@ -92,18 +92,19 @@ export async function updateCustomer(customerId, customer) {
   }
 }
 
-// delete existing customer
+// delete customer
 export async function removeCustomer(customerId) {
   let customerArray = await getAllCustomers();
-  let index = findCustomer(customerArray, customerId); // findIndex
+  let index = findCustomer(customerArray, customerId);
   if (index === -1){
     throw new Error(`Customer with ID: ${customerId} doesn't exist`);
   }
   else {
-    customerArray.splice(index, 1); // remove customer from array
+    customerArray.splice(index, 1);
     await save(customerArray);
   }
 }
+
 
 /* BASKET */
 
@@ -126,7 +127,7 @@ export async function addToBasket(product, customerId) {
   }
 }
 
-// update existing customer
+// update quantity of product to a specific new quantity
 export async function updateQuantity(productId, customerId, newQuantity) {
   let customerArray = await getAllCustomers();
   let customerIndex = findCustomer(customerArray, customerId);
@@ -182,6 +183,8 @@ export async function decrementQuantity(productId, customerId) {
     await save(customerArray);
   }
 }
+
+
 // delete a product from a customers basket
 export async function removeFromBasket(productIds, customerId) {
   let customerArray = await getAllCustomers();
@@ -200,7 +203,7 @@ export async function removeFromBasket(productIds, customerId) {
   }
 }
 
-// get a specific basket by customer ID
+// display customers basket with only productId's
 export async function getSimpleBasket(customerId) {
   let currentBasket = []
   let customerArray = await getAllCustomers();
@@ -216,7 +219,7 @@ export async function getSimpleBasket(customerId) {
   }
 }
 
-//display all product information inside customers basket
+//display customers basket with all important information about the product
 export async function getFullBasketInfo(customerId) {
   let productArray = await getAllProducts();
   let customerArray = await getAllCustomers();
