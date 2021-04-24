@@ -139,7 +139,7 @@ export async function updateQuantity(productId, customerId, newQuantity) {
 }
   else {
     customerArray[customerIndex].basket[productIndex].quantity = newQuantity
-    if(customerArray[customerIndex].basket[productIndex].quantity == 0){
+     if(customerArray[customerIndex].basket[productIndex].quantity == 0){
       removeFromBasket(productId, customerId)
     }
     await save(customerArray);

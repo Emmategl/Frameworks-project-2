@@ -1,6 +1,5 @@
 
 
-
 ### Customers ###
 
 // get a list of all customers
@@ -54,10 +53,10 @@ GET http://localhost:3000/customers/1/basketDetails HTTP/1.1
 ###
 
 // update quantity of product in basket to specific amount
-PUT  http://localhost:3000/customers/1/basket/6 HTTP/1.1
+PUT  http://localhost:3000/customers/1/basket/60 HTTP/1.1
 content-type: application/json
 
-{"quantity": 3}
+{"quantity": 2}
 ###
 
 // increment quantity of product in basket by 1

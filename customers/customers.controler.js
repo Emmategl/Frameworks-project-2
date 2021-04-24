@@ -16,7 +16,7 @@ export async function postCustomer(req, res) {
       let newCustomer = req.body;
       let productID = newCustomer.customerId
       await customerModel.addCustomer(newCustomer);
-      res.status(200).send("Customer with ID: " +  productID + " created succesfully");
+      res.status(200).json("Customer with ID: " +  productID + " created succesfully");
     } catch (error) {
       res.status(400).send(error.message);
     }
@@ -36,7 +36,7 @@ export async function postCustomer(req, res) {
       let id = parseInt(req.params.id)
       let customer = req.body;
       await customerModel.updateCustomer(id, customer);
-      res.status(200).send("Details for customer with ID: " +  id + " updated succesfully");
+      res.status(200).json("Details for customer with ID: " +  id + " updated succesfully");
     } catch (error) {
       res.status(400).send(error.message);
     }
@@ -46,7 +46,7 @@ export async function postCustomer(req, res) {
     try {
       let id = parseInt(req.params.id)
       await customerModel.removeCustomer(id);
-      res.status(200).send("Customer with ID: " + id + " deleted succesfully" );
+      res.status(200).json("Customer with ID: " + id + " deleted succesfully" );
     } catch (error) {
       res.status(400).send(error.message);
     }
@@ -60,7 +60,7 @@ export async function postBasket(req, res) {
     let id = parseInt(req.params.id)
     let productId = newProduct.productId
     await customerModel.addToBasket(newProduct, id);
-    res.status(200).send("Product with ID: " + productId + " added to basket of costumer with ID: " + id + " succesfully");
+    res.status(200).json("Product with ID: " + productId + " added to basket of costumer with ID: " + id + " succesfully");
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -72,7 +72,7 @@ export async function putProductAmount (req, res) {
     let prodId = parseInt(req.params.prodid)
     let newQuantity = req.body.quantity;
     await customerModel.updateQuantity(prodId, customerId, newQuantity);
-    res.status(200).send("Quantity of product with ID: " +  prodId + " updated to " + newQuantity + " succesfully");
+    res.status(200).json("Quantity of product with ID: " +  prodId + " is updated to " + newQuantity + " succesfully");
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -83,7 +83,7 @@ export async function putProductIncrement (req, res) {
     let customerId = parseInt(req.params.id)
     let prodId = parseInt(req.params.prodid)
     await customerModel.incrementQuantity(prodId, customerId);
-    res.status(200).send("Quantity of product with ID: " +  prodId + " incremented by 1 succesfully");
+    res.status(200).json("Quantity of product with ID: " +  prodId + " is incremented by 1 succesfully");
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -94,7 +94,7 @@ export async function putProductDecrement (req, res) {
     let customerId = parseInt(req.params.id)
     let prodId = parseInt(req.params.prodid)
     await customerModel.decrementQuantity(prodId, customerId);
-    res.status(200).send("Quantity of product with ID: " +  prodId + " decremented by 1 succesfully");
+    res.status(200).json("Quantity of product with ID: " +  prodId + " is decremented by 1 succesfully");
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -105,9 +105,8 @@ export async function deleteProduct (req, res) {
     let id = parseInt(req.params.id)
     let prodid = parseInt(req.params.prodid)
     await customerModel.removeFromBasket(prodid, id);
-    res.status(200).send("Product with ID: " + prodid + " deleted from basket of costumer with ID: " + id + " succesfully");
+    res.status(200).json("Product with ID: " + prodid + " deleted from basket of costumer with ID: " + id + " succesfully");
   } catch (error) {
-    // res.statusMessage=
     res.status(400).send(error.message);
   }
 }
@@ -118,7 +117,6 @@ export async function getBasket (req, res) {
     let basket = await customerModel.getSimpleBasket(id);
     res.json(basket);
   } catch (error) {
-    // res.statusMessage=
     res.status(400).send(error.message);
   }
 }
@@ -129,7 +127,6 @@ export async function getBasketInfo (req, res) {
     let basket = await customerModel.getFullBasketInfo(id);
     res.json(basket);
   } catch (error) {
-    // res.statusMessage=
     res.status(400).send(error.message);
   }
 }

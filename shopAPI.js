@@ -15,15 +15,6 @@ app.use(productRouter)
 
 app.get("/", (req, res) => res.send("Server 3: Hello World!"));
 
-/* app.get("/customers/:id", (req, res) => {
-  res.send(req.params);
-}); */
-
-app.post("/customers/", (req, res) => 
-  res.send("Done"));
-
-
-
 // For invalid routes
 app.get("*", (req, res) => {
   res.send("404! This is an invalid URL.");

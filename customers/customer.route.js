@@ -21,6 +21,8 @@ customerRouter.post("/customers/:id/basket", postBasket);
 
 customerRouter.put("/customers/:id/basket/:prodid", putProductAmount );
 
+customerRouter.delete("/customers/:id/basket/:prodid", deleteProduct);
+
 customerRouter.put("/customers/:id/basket/:prodid/1", putProductIncrement );
 
 customerRouter.put("/customers/:id/basket/:prodid/-1", putProductDecrement );
@@ -28,5 +30,3 @@ customerRouter.put("/customers/:id/basket/:prodid/-1", putProductDecrement );
 customerRouter.get("/customers/:id/basket", getBasket);
 
 customerRouter.get("/customers/:id/basketDetails", getBasketInfo);
-
-customerRouter.delete("/customers/:id/basket/:prodid", deleteProduct);
