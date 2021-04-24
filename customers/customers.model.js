@@ -36,9 +36,9 @@ function findCustomer(customerArray, Id) {
 }
 
 // find index of specific product
-function findProductIndex(customerArray, Id) {
+function findProductIndex(customerArray, prodId) {
   return customerArray.basket.findIndex(
-    (currCustomer) => currCustomer.productId === Id
+    (currCustomer) => currCustomer.productId === prodId
   );
 }
 
@@ -119,14 +119,69 @@ export async function addToBasket(product, customerId) {
     throw new Error(`Product with ID: ${product.productId} doesn't exist`);}
   let isProductInBasket = findProductInBasket(customerArray[customerIndex], product.productId);
   if (isProductInBasket > -1){
-    throw new Error(`Item with ID: ${product.productId} is already in the basket for customer with ID: ${customerId}`)} 
+    throw new Error(`Item with ID: ${product.productId} is already in the basket for customer with ID: ${customerId}. Use PUT method to change quantity of the product`)} 
   else {
     customerArray[customerIndex].basket.push(product);
     await save(customerArray);
   }
-  
 }
 
+// update existing customer
+export async function updateQuantity(productId, customerId, newQuantity) {
+  let customerArray = await getAllCustomers();
+  let customerIndex = findCustomer(customerArray, customerId);
+  if (customerIndex === -1){
+    throw new Error(`Customer with ID: ${customerId} doesn't exist`);}
+  let productIndex = findProductIndex(customerArray[customerIndex], productId); // findIndex
+  let isProductInBasket = findProductInBasket(customerArray[customerIndex], productId); // findIndex
+  if (isProductInBasket === -1){
+    throw new Error(`Product with ID: ${productId} is not in the basket for customer with ID: ${customerId}`);
+}
+  else {
+    customerArray[customerIndex].basket[productIndex].quantity = newQuantity
+    if(customerArray[customerIndex].basket[productIndex].quantity == 0){
+      removeFromBasket(productId, customerId)
+    }
+    await save(customerArray);
+  }
+}
+
+// increment quantity of product in basket by 1
+export async function incrementQuantity(productId, customerId) {
+  let customerArray = await getAllCustomers();
+  let customerIndex = findCustomer(customerArray, customerId);
+  if (customerIndex === -1){
+    throw new Error(`Customer with ID: ${customerId} doesn't exist`);}
+  let productIndex = findProductIndex(customerArray[customerIndex], productId); // findIndex
+  let isProductInBasket = findProductInBasket(customerArray[customerIndex], productId); // findIndex
+  if (isProductInBasket === -1){
+    throw new Error(`Product with ID: ${productId} is not in the basket for customer with ID: ${customerId}`);
+}
+  else {
+    customerArray[customerIndex].basket[productIndex].quantity++;
+    await save(customerArray);
+  }
+}
+
+// increment quantity of product in basket by 1
+export async function decrementQuantity(productId, customerId) {
+  let customerArray = await getAllCustomers();
+  let customerIndex = findCustomer(customerArray, customerId);
+  if (customerIndex === -1){
+    throw new Error(`Customer with ID: ${customerId} doesn't exist`);}
+  let productIndex = findProductIndex(customerArray[customerIndex], productId); // findIndex
+  let isProductInBasket = findProductInBasket(customerArray[customerIndex], productId); // findIndex
+  if (isProductInBasket === -1){
+    throw new Error(`Product with ID: ${productId} is not in the basket for customer with ID: ${customerId}`);
+}
+  else {
+    customerArray[customerIndex].basket[productIndex].quantity--;
+    if(customerArray[customerIndex].basket[productIndex].quantity == 0){
+      removeFromBasket(productId, customerId)
+    }
+    await save(customerArray);
+  }
+}
 // delete a product from a customers basket
 export async function removeFromBasket(productIds, customerId) {
   let customerArray = await getAllCustomers();
@@ -134,8 +189,8 @@ export async function removeFromBasket(productIds, customerId) {
   if (index === -1){
     throw new Error(`Customer with ID: ${customerId} doesn't exist`);
   }
-  let isProductInBasket = findProductInBasket(customerArray[index], productIds); // findIndex
   let productIndex = findProductIndex(customerArray[index], productIds); // findIndex
+  let isProductInBasket = findProductInBasket(customerArray[index], productIds); // findIndex
   if (isProductInBasket === -1){
       throw new Error(`Product with ID: ${productIds} is not in the basket for customer with ID: ${customerId}`);
   }
@@ -175,18 +230,47 @@ export async function getFullBasketInfo(customerId) {
   }
 }
 
-// function to change from productId to full description of the specific product
+// helper function to change from productId to full description of the specific product
 export async function displayProductInfo(productArray, basket){
   let currentBasket = []
   let basketDescription = []
   for (let i = 0; i < basket.length; i++){
       currentBasket.push(basket[i].productId)
     }
-  productArray.forEach(product=> {
-      if(currentBasket.includes(product.productId)){
-        basketDescription.push(product)
+  for (let i = 0; i < productArray.length; i++){
+      if(currentBasket.includes(productArray[i].productId)){
+          basketDescription.push(productArray[i])
       }
+  }
+basketDescription.forEach(elm=>delete elm.longDescription && delete elm.popularity)
+orderByInsertion(basketDescription, currentBasket, 'productId');
+alignQuantity(basket, basketDescription)
+return basketDescription
+}
+
+// helper function to update quantity in displayProductInfo function
+export async function alignQuantity(basket, basketDescription){
+  let e = []
+  e = basketDescription
+  console.log("im here")
+  console.log(basket.length)
+  for (let i = 0; i < basket.length; i++){
+    console.log("also here")
+    e[i].quantity = basket[i].quantity
+  }
+return e
+}
+
+// helper function to sort array in insertion order
+async function orderByInsertion(array, insertionOrder, id) {
+  array.sort(function (productA, productB) {
+    var prodA = productA[id]
+    var prodB = productB[id];
+    if (insertionOrder.indexOf(prodA) > insertionOrder.indexOf(prodB)) {
+      return 1;
+    } else {
+      return -1;
+    }
   });
-  basketDescription.forEach(elm=>delete elm.longDescription && delete elm.popularity)
-  return basketDescription
+  return array;
 }
