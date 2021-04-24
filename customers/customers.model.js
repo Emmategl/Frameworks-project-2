@@ -120,7 +120,7 @@ export async function addToBasket(product, customerId) {
     throw new Error(`Product with ID: ${product.productId} doesn't exist`);}
   let isProductInBasket = findProductInBasket(customerArray[customerIndex], product.productId);
   if (isProductInBasket > -1){
-    throw new Error(`Item with ID: ${product.productId} is already in the basket for customer with ID: ${customerId}. Use PUT method to change quantity of the product`)} 
+    throw new Error(`Product with ID: ${product.productId} is already in the basket for customer with ID: ${customerId}. Use PUT method to change quantity of the product`)} 
   else {
     customerArray[customerIndex].basket.push(product);
     await save(customerArray);
