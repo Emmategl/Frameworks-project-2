@@ -27,7 +27,7 @@ export async function getImportantProductInfo() {
   let newd = [];
   let productArray = await getAllProducts();
   newd = productArray.map(e=>Object.assign({},e))
-  productArray.forEach(elm=>delete elm.longDescription && delete elm.img_path && delete elm.popularity)
+  productArray.forEach(elm=>delete elm.longDescription && delete elm.popularity)
   return productArray
 }
 

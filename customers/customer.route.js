@@ -21,7 +21,6 @@ customerRouter.post("/customers/:id/basket", postBasket);
 
 customerRouter.get("/customers/:id/basket", getBasket);
 
-customerRouter.get("/customers/:id/baskets", getBasketInfo);
+customerRouter.get("/customers/:id/basketDetails", getBasketInfo);
 
 customerRouter.delete("/customers/:id/basket/:prodid", deleteProduct);
-

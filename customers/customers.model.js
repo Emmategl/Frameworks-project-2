@@ -8,7 +8,7 @@ const CUSTOMERS_FILE = "./customers/customers.json";
 /* CUSTOMERS */
 
 // return a list of all customers
-export async function getAll() {
+export async function getAllCustomers() {
   try {
     let customersTxt = await fs.readFile(CUSTOMERS_FILE);
     let customers = JSON.parse(customersTxt);
@@ -54,11 +54,11 @@ function findProductInBasket(customer, productIds) {
   }
  
 // get customer by ID
-export async function getByID(customerId) {
-  let customerArray = await getAll();
+export async function getCustomerByID(customerId) {
+  let customerArray = await getAllCustomers();
   let index = findCustomer(customerArray, customerId);
   if (index === -1){
-    throw new Error(`Customer with ID:${customerId} doesn't exist`);
+    throw new Error(`Customer with ID: ${customerId} doesn't exist`);
   }
   else {
     return customerArray[index];
@@ -66,11 +66,11 @@ export async function getByID(customerId) {
 }
 
 // create a new customer
-export async function add(newCustomer) {
-  let customerArray = await getAll();
+export async function addCustomer(newCustomer) {
+  let customerArray = await getAllCustomers();
   if (findCustomer(customerArray, newCustomer.customerId) !== -1 ){
     throw new Error(
-      `Customer with Id:${newCustomer.customerId} already exists`
+      `Customer with ID: ${newCustomer.customerId} already exists`
     );
   }
   else{
@@ -80,11 +80,11 @@ export async function add(newCustomer) {
 }
 
 // update existing customer
-export async function update(customerId, customer) {
-  let customerArray = await getAll();
+export async function updateCustomer(customerId, customer) {
+  let customerArray = await getAllCustomers();
   let index = findCustomer(customerArray, customerId); // findIndex
   if (index === -1){
-    throw new Error(`Customer with ID:${customerId} doesn't exist`);
+    throw new Error(`Customer with ID: ${customerId} doesn't exist`);
   }
   else {
     customerArray[index] = customer;
@@ -93,11 +93,11 @@ export async function update(customerId, customer) {
 }
 
 // delete existing customer
-export async function remove(customerId) {
-  let customerArray = await getAll();
+export async function removeCustomer(customerId) {
+  let customerArray = await getAllCustomers();
   let index = findCustomer(customerArray, customerId); // findIndex
   if (index === -1){
-    throw new Error(`Customer with ID:${customerId} doesn't exist`);
+    throw new Error(`Customer with ID: ${customerId} doesn't exist`);
   }
   else {
     customerArray.splice(index, 1); // remove customer from array
@@ -109,7 +109,7 @@ export async function remove(customerId) {
 
 // add a product to basket
 export async function addToBasket(product, customerId) {
-  let customerArray = await getAll();
+  let customerArray = await getAllCustomers();
   let productArray = await getAllProducts();
   let customerIndex = findCustomer(customerArray, customerId);
   if (customerIndex === -1){
@@ -121,13 +121,15 @@ export async function addToBasket(product, customerId) {
   if (isProductInBasket > -1){
     throw new Error(`Item with ID: ${product.productId} is already in the basket for customer with ID: ${customerId}`)} 
   else {
-    customerArray[customerIndex].basket.push(product);}
-  await save(customerArray);
+    customerArray[customerIndex].basket.push(product);
+    await save(customerArray);
+  }
+  
 }
 
 // delete a product from a customers basket
 export async function removeFromBasket(productIds, customerId) {
-  let customerArray = await getAll();
+  let customerArray = await getAllCustomers();
   let index = findCustomer(customerArray, customerId); // findIndex
   if (index === -1){
     throw new Error(`Customer with ID: ${customerId} doesn't exist`);
@@ -146,7 +148,7 @@ export async function removeFromBasket(productIds, customerId) {
 // get a specific basket by customer ID
 export async function getSimpleBasket(customerId) {
   let currentBasket = []
-  let customerArray = await getAll();
+  let customerArray = await getAllCustomers();
   let index = findCustomer(customerArray, customerId);
   if (index === -1){
     throw new Error(`Customer with ID: ${customerId} doesn't exist`);
@@ -162,19 +164,19 @@ export async function getSimpleBasket(customerId) {
 //display all product information inside customers basket
 export async function getFullBasketInfo(customerId) {
   let productArray = await getAllProducts();
-  let customerArray = await getAll();
+  let customerArray = await getAllCustomers();
   let index = findCustomer(customerArray, customerId);
   if (index === -1){
     throw new Error(`Customer with ID: ${customerId} doesn't exist`);
   }
   else {
-    let displayBasket = change(productArray, customerArray[index].basket)
+    let displayBasket = displayProductInfo(productArray, customerArray[index].basket)
     return displayBasket
   }
 }
 
 // function to change from productId to full description of the specific product
-export async function change(productArray, basket){
+export async function displayProductInfo(productArray, basket){
   let currentBasket = []
   let basketDescription = []
   for (let i = 0; i < basket.length; i++){
