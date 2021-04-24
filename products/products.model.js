@@ -27,7 +27,7 @@ export async function getImportantProductInfo() {
   let newd = [];
   let productArray = await getAllProducts();
   newd = productArray.map(e=>Object.assign({},e))
-  productArray.forEach(elm=>delete elm.longDescription && delete elm.popularity)
+  productArray.forEach(elm=>delete elm.longDescription && delete elm.popularity && delete elm.quantity)
   return productArray
 }
 
@@ -53,6 +53,7 @@ export async function getProductByID(productId) {
     throw new Error(`Product with ID: ${productId} doesn't exist`);
   }
   else {
+    productArray.forEach(elm=>delete elm.quantity)
     return productArray[index];}
 }
 
@@ -65,7 +66,7 @@ export async function getProductByCategory(categorys) {
     throw new Error(`Category with name: "${categorys}" doesn't exist`);}
   else{
   productsByCategory = productArray.filter(({category}) => category === categorys)
-  productsByCategory.forEach(elm=>delete elm.longDescription && delete elm.img_path && delete elm.popularity)
+  productsByCategory.forEach(elm=>delete elm.longDescription && delete elm.img_path && delete elm.popularity && delete elm.quantity)
   return productsByCategory}
 }
 
