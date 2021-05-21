@@ -1,9 +1,11 @@
 // index.js
 import express from 'express'
-import {getAllProducts, getProduct, getProductCategories, getProductByCategory, getImportantInfo} from './products.controler.js'
+import {getAllProducts, getProduct, getProductCategories, getProductByCategory, getImportantInfo, getProductByPopularity} from './products.controler.js'
+import cors from "cors"
+
 
 export const productRouter = express.Router();
-
+productRouter.use(cors())
 // middleware specific to this route
 productRouter.use(express.json())
 
@@ -17,3 +19,5 @@ productRouter.get("/products/:id", getProduct);
 productRouter.get("/product/categories", getProductCategories);
 
 productRouter.get("/product/categories/:category", getProductByCategory);
+
+productRouter.get("/product/popularity/:id", getProductByPopularity);

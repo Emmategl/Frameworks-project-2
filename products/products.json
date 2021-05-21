@@ -9,7 +9,8 @@
     "popularity": 3,
     "category": "tea",
     "longDescription": "A true classic in herbal tea. Cool Mint is without a doubt our best selling herbal tea. Cool Mint tea is a wonderful herbal tea of various herbs, including peppermint, spiced with lemongrass and ginger. Refreshing and delicious. Cool Mint herbal tea can also be enjoyed as iced tea on a warm summer day. ",
-    "quantity" : 0
+    "quantity" : 0,
+    "categoryID": 2
    },
    {
     "productId":3,

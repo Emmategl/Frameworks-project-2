@@ -38,7 +38,7 @@ DELETE  http://localhost:3000/customers/4 HTTP/1.1
 POST http://localhost:3000/customers/1/basket HTTP/1.1
 content-type: application/json
 
-{"productId":1, "quantity":1}
+{"productId":8, "quantity":1}
 
 ###
 
@@ -72,6 +72,9 @@ content-type: application/json
 ###
 
 // delete product from basket for specific costumer
-DELETE  http://localhost:3000/customers/1/basket/6 HTTP/1.1
+DELETE  http://localhost:3000/customers/1/basket/ HTTP/1.1
+content-type: application/json
+
+{"productId":6}
 
 ###

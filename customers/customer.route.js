@@ -1,9 +1,10 @@
 // index.js
 import express from 'express'
 import {getBasketInfo, getAllCustomers, postCustomer, getCustomer,putCustomer, deleteCustomer, getBasket, postBasket, deleteProduct, putProductAmount, putProductIncrement, putProductDecrement} from './customers.controler.js'
+import cors from "cors"
 
 export const customerRouter = express.Router();
-
+customerRouter.use(cors())
 // middleware specific to this route
 customerRouter.use(express.json())
 
@@ -21,7 +22,7 @@ customerRouter.post("/customers/:id/basket", postBasket);
 
 customerRouter.put("/customers/:id/basket/:prodid", putProductAmount );
 
-customerRouter.delete("/customers/:id/basket/:prodid", deleteProduct);
+customerRouter.delete("/customers/:id/basket/", deleteProduct);
 
 customerRouter.put("/customers/:id/basket/:prodid/1", putProductIncrement );
 

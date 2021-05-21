@@ -45,6 +45,13 @@ export function findCategory(productsArray, category) {
   );
 }
 
+// find specific product
+export function findPopularity(productsArray, popularity) {
+  return productsArray.findIndex(
+    (currProduct) => currProduct.popularity === popularity
+  );
+}
+
 // get product by ID
 export async function getProductByID(productId) {
   let productArray = await getAllProducts();
@@ -66,7 +73,7 @@ export async function getProductByCategory(categorys) {
     throw new Error(`Category with name: "${categorys}" doesn't exist`);}
   else{
   productsByCategory = productArray.filter(({category}) => category === categorys)
-  productsByCategory.forEach(elm=>delete elm.longDescription && delete elm.img_path && delete elm.popularity && delete elm.quantity)
+  productsByCategory.forEach(elm=>delete elm.longDescription && delete elm.popularity && delete elm.quantity)
   return productsByCategory}
 }
 
@@ -82,4 +89,18 @@ export async function getProductCategories() {
   });
   
   return productCategories
+}
+
+// return a list of all products in a given category
+export async function getProductByPopularity(popularitys) {
+  let productsByCategory = [];
+  console.log("helleo")
+  let productArray = await getAllProducts();
+  let cat = findPopularity(productArray, popularitys);
+  if(cat === -1){
+    throw new Error(`Product with popularity: "${popularitys}" doesn't exist`);}
+  else{
+  productsByCategory = productArray.filter(({popularity}) => popularity === popularitys)
+  productsByCategory.forEach(elm=>delete elm.longDescription && delete elm.quantity)
+  return productsByCategory}
 }

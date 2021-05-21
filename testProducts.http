@@ -18,8 +18,16 @@ GET http://localhost:3000/product/categories/ HTTP/1.1
 
 ###
 
+//Path “products/category” for “Retrieve products by category”
+//should include categoryID:“products/category/{categoryID}”
+
 
 // get product by category
 GET http://localhost:3000/product/categories/tea HTTP/1.1
+
+###
+
+// get product by popularity
+GET http://localhost:3000/product/popularity/4 HTTP/1.1
 
 ###

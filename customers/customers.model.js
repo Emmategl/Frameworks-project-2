@@ -255,10 +255,7 @@ return basketDescription
 export async function alignQuantity(basket, basketDescription){
   let e = []
   e = basketDescription
-  console.log("im here")
-  console.log(basket.length)
   for (let i = 0; i < basket.length; i++){
-    console.log("also here")
     e[i].quantity = basket[i].quantity
   }
 return e
