@@ -2,7 +2,7 @@ import express from "express";
 import {customerRouter} from "./customers/customer.route.js";
 import {productRouter} from "./products/products.route.js";
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 
 // This is a built-in middleware function in Express. It parses incoming requests with JSON payloads.
 app.use(express.json());

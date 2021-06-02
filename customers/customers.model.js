@@ -245,7 +245,7 @@ export async function displayProductInfo(productArray, basket){
           basketDescription.push(productArray[i])
       }
   }
-basketDescription.forEach(elm=>delete elm.longDescription && delete elm.popularity)
+basketDescription.forEach(elm=>delete elm.longDescription && delete elm.popularity && delete elm.categoryId)
 orderByInsertion(basketDescription, currentBasket, 'productId');
 alignQuantity(basket, basketDescription)
 return basketDescription

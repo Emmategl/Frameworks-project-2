@@ -1,6 +1,6 @@
 // index.js
 import express from 'express'
-import {getAllProducts, getProduct, getProductCategories, getProductByCategory, getImportantInfo, getProductByPopularity} from './products.controler.js'
+import {getAllProducts, getProduct, getProductCategories, getProductByCategory, getProductByCategoryId, getImportantInfo, getProductByPopularity} from './products.controler.js'
 import cors from "cors"
 
 
@@ -19,5 +19,7 @@ productRouter.get("/products/:id", getProduct);
 productRouter.get("/product/categories", getProductCategories);
 
 productRouter.get("/product/categories/:category", getProductByCategory);
+
+productRouter.get("/product/category/:id", getProductByCategoryId);
 
 productRouter.get("/product/popularity/:id", getProductByPopularity);

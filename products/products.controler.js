@@ -29,6 +29,16 @@ export async function getProductByCategory (req, res) {
   }
 }
 
+export async function getProductByCategoryId (req, res) {
+  try {
+    let category = parseInt(req.params.id)
+    let productByCat = await productModel.getProductByCategoryId(category);
+    res.json(productByCat);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+}
+
 export async function getProductByPopularity (req, res) {
   try {
     let id = parseInt(req.params.id)

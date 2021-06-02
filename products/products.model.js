@@ -27,7 +27,7 @@ export async function getImportantProductInfo() {
   let newd = [];
   let productArray = await getAllProducts();
   newd = productArray.map(e=>Object.assign({},e))
-  productArray.forEach(elm=>delete elm.longDescription && delete elm.popularity && delete elm.quantity)
+  productArray.forEach(elm=>delete elm.longDescription && delete elm.quantity)
   return productArray
 }
 
@@ -42,6 +42,13 @@ export function findproduct(productsArray, Id) {
 export function findCategory(productsArray, category) {
   return productsArray.findIndex(
     (currProduct) => currProduct.category === category
+  );
+}
+
+// find specific product
+export function findCategoryById(productsArray, categoryId) {
+  return productsArray.findIndex(
+    (currProduct) => currProduct.categoryId === categoryId,
   );
 }
 
@@ -77,6 +84,19 @@ export async function getProductByCategory(categorys) {
   return productsByCategory}
 }
 
+// return a list of all products in a given category by categoryId
+export async function getProductByCategoryId(categoryIds) {
+  let productsByCategory = [];
+  let productArray = await getAllProducts();
+  let cat = findCategoryById(productArray, categoryIds);
+  if(cat === -1){
+    throw new Error(`Category with id: "${categoryIds}" doesn't exist`);}
+  else{
+  productsByCategory = productArray.filter(({categoryId}) => categoryId === categoryIds)
+  productsByCategory.forEach(elm=>delete elm.longDescription && delete elm.quantity)
+  return productsByCategory}
+}
+
 // return a list of all the categories
 export async function getProductCategories() {
   let productCategories = [];
@@ -87,14 +107,12 @@ export async function getProductCategories() {
       productCategories.push(element.category)
     }
   });
-  
   return productCategories
 }
 
 // return a list of all products in a given category
 export async function getProductByPopularity(popularitys) {
   let productsByCategory = [];
-  console.log("helleo")
   let productArray = await getAllProducts();
   let cat = findPopularity(productArray, popularitys);
   if(cat === -1){
