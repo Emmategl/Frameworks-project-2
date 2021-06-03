@@ -20,9 +20,9 @@ customerRouter.delete("/customers/:id", deleteCustomer);
 
 customerRouter.post("/customers/:id/basket", postBasket);
 
-customerRouter.put("/customers/:id/basket/:prodid", putProductAmount );
+customerRouter.put("/customers/:id/basket/:prodid", putProductAmount )
 
-customerRouter.delete("/customers/:id/basket/", deleteProduct);
+customerRouter.delete("/customers/:id/basket/:prodid", deleteProduct);
 
 customerRouter.put("/customers/:id/basket/:prodid/1", putProductIncrement );
 

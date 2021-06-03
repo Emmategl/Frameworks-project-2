@@ -38,7 +38,7 @@ DELETE  http://localhost:3001/customers/4 HTTP/1.1
 POST http://localhost:3001/customers/1/basket HTTP/1.1
 content-type: application/json
 
-{"productId":8, "quantity":1}
+{"productId":9, "quantity":1}
 
 ###
 
@@ -53,10 +53,10 @@ GET http://localhost:3001/customers/1/basketDetails HTTP/1.1
 ###
 
 // update quantity of product in basket for specific costumer to specific quantity
-PUT  http://localhost:3001/customers/1/basket/60 HTTP/1.1
+PUT  http://localhost:3001/customers/1/basket/9 HTTP/1.1
 content-type: application/json
 
-{"quantity": 2}
+{"quantity": 3}
 ###
 
 // increment quantity of product in basket for specific costumer by 1
@@ -76,5 +76,11 @@ DELETE  http://localhost:3001/customers/1/basket/ HTTP/1.1
 content-type: application/json
 
 {"productId":6}
+
+###
+
+// delete product from basket for specific costumer
+DELETE  http://localhost:3001/customers/1/basket/9 HTTP/1.1
+content-type: application/json
 
 ###

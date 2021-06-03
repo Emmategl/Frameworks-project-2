@@ -100,10 +100,8 @@ export async function putProductDecrement (req, res) {
 
 export async function deleteProduct (req, res) {
   try {
-    let product = req.body;
-    let prodid = product.productId
     let id = parseInt(req.params.id)
-    /* let prodid = parseInt(req.params.prodid) */
+    let prodid = parseInt(req.params.prodid)
     await customerModel.removeFromBasket(prodid, id);
     res.status(200).json("Product with ID: " + prodid + " deleted from basket of costumer with ID: " + id + " successfully");
   } catch (error) {
